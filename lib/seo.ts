@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CONTACT, FAQS, SERVICES, SOCIAL_LINKS, TECH } from "./data";
 
-export const SITE_URL = "https://trigge.solutions";
+export const SITE_URL = "https://triggesolutions.com";
 export const BRAND = "Trigge Solutions";
 export const OG_IMAGE = "/og/trigge-solutions.png";
 

@@ -5,8 +5,8 @@
 > businesses across all 50 U.S. states and Canada. Every project starts with a
 > free consultation and a fixed written quote, and the client owns the code.
 
-- Website: https://trigge.solutions
-- Contact: trigge.info@gmail.com | https://trigge.solutions/contact
+- Website: https://triggesolutions.com
+- Contact: trigge.info@gmail.com | https://triggesolutions.com/contact
 - Based in: Pennsylvania, USA
 - Serves: United States (all 50 states) and Canada, in every time zone
 - Languages: English
@@ -69,7 +69,7 @@ updates, backups and ongoing improvements; support is also available on demand.
 
 ## Pages
 
-- [Home](https://trigge.solutions/): overview of services and process.
-- [Services](https://trigge.solutions/services): detailed service list and stack.
-- [About](https://trigge.solutions/about): the team, values and how work runs.
-- [Contact](https://trigge.solutions/contact): project form and free consultation.
+- [Home](https://triggesolutions.com/): overview of services and process.
+- [Services](https://triggesolutions.com/services): detailed service list and stack.
+- [About](https://triggesolutions.com/about): the team, values and how work runs.
+- [Contact](https://triggesolutions.com/contact): project form and free consultation.

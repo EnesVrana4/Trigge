@@ -14,7 +14,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://trigge.solutions"),
+  metadataBase: new URL("https://triggesolutions.com"),
   title: {
     default: "Trigge Solutions | Custom Software Development, U.S. & Canada",
     template: "%s | Trigge Solutions",
