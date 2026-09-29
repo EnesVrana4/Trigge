@@ -1,0 +1,75 @@
+# Trigge Solutions
+
+> Software development company based in Pennsylvania, United States, building
+> custom websites, web applications, e-commerce platforms and internal tools for
+> businesses across all 50 U.S. states and Canada. Every project starts with a
+> free consultation and a fixed written quote, and the client owns the code.
+
+- Website: https://trigge.solutions
+- Contact: trigge.info@gmail.com | https://trigge.solutions/contact
+- Based in: Pennsylvania, USA
+- Serves: United States (all 50 states) and Canada, in every time zone
+- Languages: English
+
+## Services
+
+- **Web Development** — Marketing sites and landing pages on modern frameworks,
+  optimized for speed, search engines and conversion.
+- **Web Applications** — Dashboards, internal tools and customer portals designed
+  around the way a business actually works, with role-based access, real-time
+  data, reporting and cloud deployment.
+- **E-Commerce** — Storefronts from product catalog to checkout and payments,
+  with inventory management, order automation and multi-language support.
+- **UI/UX Design** — Research, wireframes and interface design, including design
+  systems, prototypes, accessibility (WCAG) and mobile-first layouts.
+- **Integrations & APIs** — Connecting websites and platforms with ERP, CRM,
+  payment and logistics systems over REST and GraphQL, so data flows without
+  manual work.
+- **Maintenance & Support** — Uptime monitoring, security updates, performance
+  tuning and priority response after launch.
+
+## Technology
+
+Next.js, React, TypeScript, Node.js, Tailwind CSS, PostgreSQL, Prisma, AWS,
+Vercel, Docker, Stripe, Figma.
+
+## How projects run
+
+1. **Discovery** — A free consultation to understand goals, users and
+   constraints, then agree on scope and timeline.
+2. **Design** — Wireframes and interface design, reviewed with the client before
+   production code is written.
+3. **Development** — Short iterations with a live staging link, open from week
+   one, plus weekly demos and a shared project board.
+4. **Launch & Support** — Testing, deployment and handover, then monitoring,
+   updates and continuous improvement.
+
+## Common questions
+
+**How long does a project take?** A marketing website usually takes 3–5 weeks. A
+custom web application typically runs 8–16 weeks depending on scope. A written
+timeline with milestones follows the discovery call.
+
+**How much does it cost?** Every project is quoted individually after a free
+consultation, as a fixed written quote with a clear breakdown and no hidden
+costs. Typical project budgets range from under $5,000 to $40,000 and above.
+
+**Who owns the code?** The client does. On final delivery they receive the source
+code, the repository and all related accounts and documentation.
+
+**Do you work remotely across the U.S. and Canada?** Yes. Work runs through
+regular calls, a shared project board and a live staging link, in every time zone
+from Newfoundland to Hawaii.
+
+**Can you take over an existing project?** Yes. Existing codebases are audited,
+fixed and extended, starting with a technical review of what is worth keeping.
+
+**What happens after launch?** Maintenance plans cover monitoring, security
+updates, backups and ongoing improvements; support is also available on demand.
+
+## Pages
+
+- [Home](https://trigge.solutions/): overview of services and process.
+- [Services](https://trigge.solutions/services): detailed service list and stack.
+- [About](https://trigge.solutions/about): the team, values and how work runs.
+- [Contact](https://trigge.solutions/contact): project form and free consultation.

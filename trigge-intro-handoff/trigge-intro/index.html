@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trigge – first-visit intro (prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:"Manrope",system-ui,sans-serif}
+a{color:#ffffff}a:hover{color:#c9d8f5}
+/* The design is authored on a fixed 1440x810 stage; this scales it to fit the window. */
+#fit{position:fixed;left:50%;top:50%;width:1440px;height:810px;transform-origin:50% 50%}
+</style>
+</head>
+<body>
+<div id="fit"></div>
+
+<!-- The whole scene: markup with {{holes}} filled every frame from Component.renderVals() -->
+<template id="scene">
+<div onMouseMove="{{onMove}}" style="width: 1440px; height: 810px; position: relative; overflow: hidden; background: #000000; color: #ffffff; font-family: 'Manrope', system-ui, sans-serif">
+
+<!-- HERO (sits underneath, revealed as the black curtain lifts) -->
+<div style="position: absolute; inset: 0; overflow: hidden">
+<div style="position: absolute; inset: 0; transform: scale({{heroScale}}); transform-origin: 60% 50%; background: #0b0e13; overflow: hidden">
+<img src="assets/hero-video-placeholder.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; transform: scale({{vidS}}) translate({{vidX}}%, {{vidY}}%)">
+<div style="position: absolute; top: -10%; bottom: -10%; left: 10%; width: 60%; background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(210,225,255,0.08) 50%, rgba(255,255,255,0) 100%); filter: blur(20px); transform: translateX({{sweepX}}%)"></div>
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse 40% 50% at 70% 35%, rgba(255,240,220,0.07) 0%, rgba(255,240,220,0) 70%); opacity: {{flick}}"></div>
+</div>
+<div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,10,14,0.72) 0%, rgba(8,10,14,0.5) 45%, rgba(8,10,14,0.35) 100%)"></div>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; height: 180px; background: linear-gradient(180deg, rgba(8,10,14,0) 0%, rgba(8,10,14,0.7) 100%)"></div>
+
+<!-- nav -->
+<nav style="position: absolute; left: 0; right: 0; top: 16px; height: 42px; display: flex; align-items: center; justify-content: center; gap: 32px; font-size: 14px; font-weight: 500">
+<a href="#" style="color: #ffffff; text-decoration: none; padding-bottom: 6px; border-bottom: 2px solid #9dbaf0; opacity: {{n0}}; transform: translateY({{n0y}}px)">Home</a>
+<a href="#" style="color: #c7ccd3; text-decoration: none; padding-bottom: 8px; opacity: {{n1}}; transform: translateY({{n1y}}px)">Services</a>
+<a href="#" style="color: #c7ccd3; text-decoration: none; padding-bottom: 8px; opacity: {{n2}}; transform: translateY({{n2y}}px)">About</a>
+<a href="#" style="color: #c7ccd3; text-decoration: none; padding-bottom: 8px; opacity: {{n3}}; transform: translateY({{n3y}}px)">Contact</a>
+</nav>
+<a href="#" style="position: absolute; right: 180px; top: 16px; height: 42px; padding: 0 22px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.45); border-radius: 999px; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box; opacity: {{n4}}; transform: translateY({{n4y}}px)">Get in Touch
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+
+<!-- hero copy -->
+<div style="position: absolute; left: 180px; top: 214px; width: 600px; display: flex; flex-direction: column; gap: 0">
+<div style="font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.24em; color: #9aa1aa; margin-bottom: 20px; opacity: {{h0}}; transform: translateY({{h0y}}px)">IDEAS → CODE → SOLUTIONS</div>
+<div style="overflow: hidden"><div style="font-size: 60px; line-height: 60px; font-weight: 700; letter-spacing: -0.02em; transform: translateY({{l0}}%)">Custom Software</div></div>
+<div style="overflow: hidden"><div style="font-size: 60px; line-height: 60px; font-weight: 700; letter-spacing: -0.02em; transform: translateY({{l1}}%)">Solutions for Your</div></div>
+<div style="overflow: hidden; padding-bottom: 6px"><div style="font-size: 60px; line-height: 60px; font-weight: 700; letter-spacing: -0.02em; color: #9dbaf0; transform: translateY({{l2}}%)">Business</div></div>
+<p style="margin: 22px 0 0; max-width: 470px; font-size: 17px; line-height: 28px; color: #b9bfc7; font-weight: 500; opacity: {{h3}}; transform: translateY({{h3y}}px)">We build modern websites, web applications and digital platforms that help your business grow, work smarter and stay ahead of the competition.</p>
+<div style="margin-top: 34px; opacity: {{h4}}; transform: translateY({{h4y}}px)">
+<a href="#" style="display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 26px; background: #ffffff; color: #111418; border-radius: 999px; text-decoration: none; font-size: 15px; font-weight: 600">Get a Free Consultation
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+</div>
+
+<!-- 3D laptop -->
+<div style="position: absolute; left: 830px; top: 178px; width: 700px; height: 560px; perspective: 1900px; perspective-origin: 38% 52%; opacity: {{h5}}; transform: translateY({{h5y}}px) scale(0.86); transform-origin: 0 0">
+<div style="position: absolute; left: 20px; top: 0; width: 460px; height: 540px; transform-style: preserve-3d; transform: rotateX(-6deg) rotateY({{tiltY}}deg); transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1)">
+
+<!-- base -->
+<div style="position: absolute; left: 0; top: 320px; width: 460px; height: 300px; transform-origin: 50% 0; transform: rotateX(90deg); transform-style: preserve-3d; border-radius: 8px 8px 18px 18px; background: linear-gradient(112deg, rgba(255,255,255,0) 28%, rgba(255,255,255,0.08) 46%, rgba(255,255,255,0) 60%), repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), linear-gradient(180deg, #4e555e 0%, #41474f 45%, #373d44 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.09), inset 0 -2px 0 rgba(255,255,255,0.05)">
+<div style="position: absolute; left: -14px; top: -6px; width: 488px; height: 320px; border-radius: 26px; background: rgba(0,0,0,0.75); filter: blur(16px); transform: translateZ(-14px)"></div>
+<sc-for list="{{baseSlices}}" as="s" hint-placeholder-count="10">
+<div style="position: absolute; inset: 0; border-radius: 8px 8px 18px 18px; background: {{s.bg}}; transform: translateZ({{s.z}}px)"></div>
+</sc-for>
+<div style="position: absolute; left: 60px; top: 0; width: 340px; height: 10px; border-radius: 0 0 6px 6px; background: linear-gradient(180deg, #0c0e10 0%, #2b3036 55%, #15181b 100%)"></div>
+<div style="position: absolute; left: 18px; top: 28px; width: 30px; height: 148px; border-radius: 4px; background-image: radial-gradient(circle, #1b1f24 0px, #1b1f24 1px, rgba(0,0,0,0) 1.5px); background-size: 5px 5px"></div>
+<div style="position: absolute; left: 412px; top: 28px; width: 30px; height: 148px; border-radius: 4px; background-image: radial-gradient(circle, #1b1f24 0px, #1b1f24 1px, rgba(0,0,0,0) 1.5px); background-size: 5px 5px"></div>
+<div style="position: absolute; left: 58px; top: 24px; width: 344px; height: 152px; box-sizing: border-box; padding: 5px; border-radius: 7px; background: #23272c; box-shadow: inset 0 1px 3px rgba(0,0,0,0.6); display: flex; flex-direction: column; gap: 4px">
+<sc-for list="{{keyRows}}" as="row" hint-placeholder-count="6">
+<div style="display: flex; gap: 4px; height: {{row.h}}px">
+<sc-for list="{{row.keys}}" as="k" hint-placeholder-count="12">
+<div style="flex-grow: {{k.g}}; flex-basis: 0; border-radius: 3px; background: linear-gradient(180deg, #1c1f23 0%, #111316 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.4), 0 0 0 0.5px rgba(0,0,0,0.6), 0 1px 1px rgba(0,0,0,0.5)"></div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div style="position: absolute; left: 140px; top: 190px; width: 180px; height: 94px; border-radius: 8px; background: linear-gradient(125deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 45%), linear-gradient(180deg, #474e57 0%, #3c4249 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.25)"></div>
+<div style="position: absolute; left: 58px; top: 24px; width: 344px; height: 152px; border-radius: 7px; background: radial-gradient(ellipse 70% 90% at 50% 0%, rgba(157,186,240,0.10) 0%, rgba(157,186,240,0) 70%); opacity: {{screenOn}}"></div>
+<div style="position: absolute; left: 200px; top: 294px; width: 60px; height: 6px; border-radius: 6px 6px 0 0; background: #2a2f35"></div>
+<div style="position: absolute; left: 0; top: 0; width: 460px; height: 150px; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%); opacity: {{lidShade}}"></div>
+<div style="position: absolute; left: 0; top: 0; width: 460px; height: 170px; background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(157,186,240,0.16) 0%, rgba(157,186,240,0) 70%); opacity: {{screenOn}}"></div>
+</div>
+
+<!-- lid -->
+<div style="position: absolute; left: 0; top: 28px; width: 460px; height: 290px; transform-origin: 50% 100%; transform: rotateX({{lid}}deg); transform-style: preserve-3d">
+<div style="position: absolute; inset: 0; backface-visibility: hidden; border-radius: 16px 16px 5px 5px; background: #050608; padding: 9px 9px 20px; box-sizing: border-box; box-shadow: inset 0 0 0 1px #7a828c, inset 0 0 0 2.5px #2c3238, inset 0 0 0 4px #07080a">
+<div style="position: absolute; left: 226px; top: 3px; width: 8px; height: 4px; display: flex; align-items: center; justify-content: center"><div style="width: 4px; height: 4px; border-radius: 999px; background: #1a2230; box-shadow: 0 0 0 1px #0d1116"></div></div>
+<div style="position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 4px; background: #000000">
+<div style="position: absolute; inset: 0; opacity: {{screenOn}}; transform: scale({{screenScale}})">
+<sc-for list="{{deskSlides}}" as="s" hint-placeholder-count="5">
+<img src="{{s.src}}" alt="{{s.alt}}" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: {{s.pos}}; display: block; transform: translateY({{s.y}}%); transition: {{s.tr}}">
+</sc-for>
+</div>
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse 90% 80% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.35) 100%); opacity: {{screenOn}}"></div>
+</div>
+<div style="position: absolute; inset: 0; border-radius: 14px 14px 4px 4px; background: linear-gradient(118deg, rgba(255,255,255,0) {{glareA}}%, rgba(255,255,255,0.10) {{glareB}}%, rgba(255,255,255,0.02) {{glareC}}%, rgba(255,255,255,0) {{glareD}}%)"></div>
+</div>
+<sc-for list="{{lidSlices}}" as="s" hint-placeholder-count="6">
+<div style="position: absolute; inset: 0; border-radius: 16px 16px 5px 5px; background: {{s.bg}}; transform: translateZ({{s.z}}px)"></div>
+</sc-for>
+<div style="position: absolute; inset: 0; backface-visibility: hidden; transform: translateZ(-6px) rotateY(180deg); border-radius: 16px 16px 5px 5px; background: linear-gradient(120deg, rgba(255,255,255,0) 25%, rgba(255,255,255,0.09) 45%, rgba(255,255,255,0) 62%), repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 3px), linear-gradient(165deg, #5b636d 0%, #474e57 40%, #373d44 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center">
+<svg width="58" height="41" viewBox="0 0 1975 1389" aria-hidden="true"><g transform="translate(-49.853352,1439.500000) scale(0.100000,-0.100000)" fill="#ffffff" fill-opacity="0.22"><path d="M11820 14388 l-685 -6 -2965 -11 -2965 -11 -2353 0 -2353 0 3 -14 3 -14 99 -104 99 -103 151 -155 151 -156 200 -209 200 -210 81 -85 82 -85 42 -45 43 -45 226 -235 227 -235 99 -105 100 -105 10 -11 10 -11 191 -199 192 -199 48 -54 49 -53 32 -14 32 -14 1990 0 1990 0 28 -11 28 -10 30 -31 30 -31 -4 -5647 -4 -5647 12 -7 12 -7 68 73 68 73 43 45 42 45 131 135 132 135 174 185 175 185 155 160 156 161 215 224 215 225 110 115 109 115 136 140 135 141 211 219 211 220 64 69 64 68 19 30 19 29 -6 392 -6 392 -11 465 -11 465 6 580 6 580 4 365 4 365 1 2420 1 2420 9 39 8 38 27 28 27 28 43 11 42 11 4027 -1 4026 0 35 7 34 6 208 216 208 216 115 120 116 121 99 105 100 105 105 110 105 109 156 161 155 160 96 100 95 100 26 28 26 28 183 192 183 192 136 140 136 140 51 54 52 53 0 15 0 14 -267 -2 -268 -2 -3605 4 -3605 4 -685 -7z"></path><path d="M11954 10006 l-34 -34 0 -2135 0 -2136 11 -7 12 -7 66 71 66 70 75 79 74 78 95 100 95 100 227 235 226 235 114 120 114 120 100 105 99 105 160 165 159 165 101 105 101 105 95 100 94 100 101 105 100 105 231 240 232 240 47 50 47 50 81 85 81 85 100 105 101 105 235 245 235 244 111 116 110 115 99 105 99 105 34 32 34 33 -5 15 -6 15 -2042 0 -2041 0 -34 -34z"></path></g></svg>
+</div>
+</div>
+
+<!-- phone: slides out from behind the screen -->
+<div style="position: absolute; left: 0; top: 34px; width: 128px; height: 262px; transform-style: preserve-3d; transform: translate3d({{phX}}px, 0px, {{phZ}}px) rotateY({{phR}}deg)">
+<div style="position: absolute; left: -26px; top: 296px; width: 180px; height: 80px; transform-origin: 50% 0; transform: translateZ(-47px) rotateX(90deg); background: radial-gradient(ellipse 48% 40% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.22) 50%, rgba(0,0,0,0) 75%); filter: blur(5px); opacity: {{phShadow}}"></div>
+<sc-for list="{{phoneSlices}}" as="s" hint-placeholder-count="14">
+<div style="position: absolute; inset: 0; border-radius: 21px; background: {{s.bg}}; transform: translateZ({{s.z}}px); opacity: {{phO}}"></div>
+</sc-for>
+<div style="position: absolute; left: 128px; top: 62px; width: 10px; height: 36px; transform-origin: 0 50%; transform: translateX(0.6px) translateZ(-2px) rotateY(90deg); border-radius: 3px; background: linear-gradient(90deg, #a7afb9 0%, #5d656e 100%); opacity: {{phO}}"></div>
+<div style="position: absolute; inset: 0; backface-visibility: hidden; transform: translateZ(-14px) rotateY(180deg); border-radius: 21px; background: linear-gradient(160deg, #454c55 0%, #30363c 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); opacity: {{phO}}">
+<div style="position: absolute; left: 10px; top: 10px; width: 46px; height: 46px; border-radius: 13px; background: #2a2f35; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08)"></div>
+</div>
+<div style="position: absolute; inset: 0; backface-visibility: hidden; border-radius: 21px; background: #060708; padding: 5px; box-sizing: border-box; box-shadow: inset 0 0 0 1.5px #8a929c, inset 0 0 0 3px #1c2025; opacity: {{phO}}">
+<div style="position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 16px; background: #0b0e13; color: #ffffff; font-family: 'Manrope', sans-serif">
+<sc-for list="{{phoneSlides}}" as="s" hint-placeholder-count="4">
+<img src="{{s.src}}" alt="{{s.alt}}" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; display: block; transform: translateY({{s.y}}%); transition: {{s.tr}}">
+</sc-for>
+<div style="position: absolute; left: 43px; top: 4.5px; width: 32px; height: 7px; border-radius: 999px; background: #000000"></div>
+<div style="position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.02) 35%, rgba(255,255,255,0) 50%)"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BLACK CURTAIN (loader surface) -->
+<div style="position: absolute; inset: 0; background: #000000; clip-path: inset(0 0 {{curtain}}% 0)">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse {{glowW}}px {{glowH}}px at 50.4% 45.5%, rgba(157,186,240,{{glowA}}) 0%, rgba(157,186,240,{{glowA2}}) 35%, rgba(157,186,240,0) 100%)"></div>
+<div style="position: absolute; inset: 0; opacity: {{gridO}}; background-image: linear-gradient(rgba(255,255,255,0.075) 1px, rgba(0,0,0,0) 1px), linear-gradient(90deg, rgba(255,255,255,0.075) 1px, rgba(0,0,0,0) 1px), linear-gradient(rgba(255,255,255,0.03) 1px, rgba(0,0,0,0) 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, rgba(0,0,0,0) 1px); background-size: 192px 192px, 192px 192px, 48px 48px, 48px 48px; background-position: calc(50.4% - 0px) calc(45.5% - 0px); -webkit-mask-image: radial-gradient(circle at 50.4% 45.5%, #000 0px, #000 {{gridR}}px, rgba(0,0,0,0) {{gridR2}}px); mask-image: radial-gradient(circle at 50.4% 45.5%, #000 0px, #000 {{gridR}}px, rgba(0,0,0,0) {{gridR2}}px)"></div>
+<div style="position: absolute; left: 0; right: 0; top: 488px; display: flex; flex-direction: column; align-items: center; gap: 22px; opacity: {{ui}}">
+<div style="display: flex; align-items: center; gap: 14px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.3em">
+<sc-for list="{{words}}" as="w" hint-placeholder-count="3">
+<span style="color: {{w.color}}; transition: color 240ms ease-out">{{w.label}}</span>
+<sc-if value="{{w.arrow}}" hint-placeholder-val="{{ true }}"><span style="color: {{w.arrowColor}}; letter-spacing: 0">→</span></sc-if>
+</sc-for>
+</div>
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="width: 320px; height: 1px; background: #24282c; position: relative">
+<div style="position: absolute; left: 0; top: 0; height: 1px; width: {{count}}%; background: #ffffff"></div>
+</div>
+<div style="width: 36px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #ffffff; font-variant-numeric: tabular-nums; text-align: right">{{countText}}</div>
+</div>
+</div>
+</div>
+
+<!-- curtain edge light -->
+<div style="position: absolute; left: 0; right: 0; top: {{edgeY}}px; height: 1px; background: linear-gradient(90deg, rgba(157,186,240,0) 0%, rgba(157,186,240,0.9) 50%, rgba(157,186,240,0) 100%); opacity: {{edgeO}}"></div>
+
+<!-- LOGO LOCKUP: starts centred, flies into the nav slot -->
+<div style="position: absolute; left: 546px; top: 330px; display: flex; align-items: center; gap: 22px; transform-origin: 0 0; transform: translate({{lx}}px, {{ly}}px) scale({{ls}})">
+<svg width="110" height="77" viewBox="0 0 1975 1389" aria-label="Trigge Solutions" style="overflow: visible">
+<g transform="translate(-49.853352,1439.500000) scale(0.100000,-0.100000)" fill="#ffffff" style="fill-opacity: {{fill}}">
+<path d="M11820 14388 l-685 -6 -2965 -11 -2965 -11 -2353 0 -2353 0 3 -14 3 -14 99 -104 99 -103 151 -155 151 -156 200 -209 200 -210 81 -85 82 -85 42 -45 43 -45 226 -235 227 -235 99 -105 100 -105 10 -11 10 -11 191 -199 192 -199 48 -54 49 -53 32 -14 32 -14 1990 0 1990 0 28 -11 28 -10 30 -31 30 -31 -4 -5647 -4 -5647 12 -7 12 -7 68 73 68 73 43 45 42 45 131 135 132 135 174 185 175 185 155 160 156 161 215 224 215 225 110 115 109 115 136 140 135 141 211 219 211 220 64 69 64 68 19 30 19 29 -6 392 -6 392 -11 465 -11 465 6 580 6 580 4 365 4 365 1 2420 1 2420 9 39 8 38 27 28 27 28 43 11 42 11 4027 -1 4026 0 35 7 34 6 208 216 208 216 115 120 116 121 99 105 100 105 105 110 105 109 156 161 155 160 96 100 95 100 26 28 26 28 183 192 183 192 136 140 136 140 51 54 52 53 0 15 0 14 -267 -2 -268 -2 -3605 4 -3605 4 -685 -7z"></path>
+<path style="fill-opacity: {{fill2}}" d="M11954 10006 l-34 -34 0 -2135 0 -2136 11 -7 12 -7 66 71 66 70 75 79 74 78 95 100 95 100 227 235 226 235 114 120 114 120 100 105 99 105 160 165 159 165 101 105 101 105 95 100 94 100 101 105 100 105 231 240 232 240 47 50 47 50 81 85 81 85 100 105 101 105 235 245 235 244 111 116 110 115 99 105 99 105 34 32 34 33 -5 15 -6 15 -2042 0 -2041 0 -34 -34z"></path>
+</g>
+<g fill="none" stroke="#ffffff" style="stroke-width: 22; stroke-linejoin: round; stroke-linecap: round; stroke-opacity: {{strokeO}}">
+<polyline points="{{p1}}"></polyline>
+</g>
+<circle cx="{{hx}}" cy="{{hy}}" r="70" fill="#9dbaf0" style="opacity: {{penGlow}}"></circle>
+<circle cx="{{hx}}" cy="{{hy}}" r="22" fill="#ffffff" style="opacity: {{pen}}"></circle>
+</svg>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; font-family: 'Montserrat', sans-serif; font-size: 44px; line-height: 44px; font-weight: 700; letter-spacing: 0.1em; overflow: hidden">
+<sc-for list="{{letters}}" as="c" hint-placeholder-count="6">
+<span style="display: inline-block; opacity: {{c.o}}; transform: translateY({{c.y}}px)">{{c.ch}}</span>
+</sc-for>
+</div>
+<div style="font-family: 'Montserrat', sans-serif; font-size: 11px; line-height: 12px; font-weight: 600; color: #d6dae0; letter-spacing: {{solSpacing}}em; opacity: {{solO}}">SOLUTIONS</div>
+</div>
+</div>
+
+<sc-if value="{{showReplay}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{replay}}" style="position: absolute; left: 24px; bottom: 20px; height: 44px; padding: 0 16px; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); color: #ffffff; border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; cursor: pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 3v6h6"></path></svg>
+REPLAY</button>
+</sc-if>
+</div>
+</template>
+
+<script>
+/* Minimal runtime for the prototype.
+ * The intro was designed as a template (markup with {{holes}}, <sc-for>, <sc-if>) plus a
+ * Component class whose renderVals() returns every animated value. This ~120-line runtime
+ * renders that template with plain DOM so the prototype runs by just opening index.html.
+ * In production, port the Component logic to your framework (see README.md). */
+(function () {
+  class DCLogic {
+    constructor(props) { this.props = props || {}; this.state = {}; }
+    setState(u) {
+      const patch = typeof u === 'function' ? u(this.state) : u;
+      Object.assign(this.state, patch);
+      schedule();
+    }
+  }
+  window.DCLogic = DCLogic;
+
+  const HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  let comp, vals, bindings = [], queued = false;
+
+  function lookup(path, scope) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    const parts = path.split('.');
+    let cur;
+    const head = parts[0];
+    let found = false;
+    for (let i = scope.length - 1; i >= 0; i--) {
+      if (scope[i].name === head) { cur = scope[i].get(); found = true; break; }
+      if (head === '$index' && scope[i].index != null) { cur = scope[i].index; found = true; break; }
+    }
+    if (!found) cur = vals[head];
+    for (let i = 1; i < parts.length && cur != null; i++) cur = cur[parts[i]];
+    return cur;
+  }
+  const interp = (tpl, scope) => tpl.replace(HOLE, (_, p) => { const v = lookup(p, scope); return v == null ? '' : v; });
+  const whole = (tpl) => { const m = tpl.match(/^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/); return m ? m[1] : null; };
+
+  function process(node, scope) {
+    if (node.nodeType === 3) {
+      if (HOLE.test(node.nodeValue)) {
+        HOLE.lastIndex = 0;
+        const tpl = node.nodeValue;
+        bindings.push(() => { const s = interp(tpl, scope); if (node.nodeValue !== s) node.nodeValue = s; });
+      }
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    const tag = node.tagName.toLowerCase();
+
+    if (tag === 'sc-for') {
+      const listPath = whole(node.getAttribute('list'));
+      const as = node.getAttribute('as') || 'item';
+      const list = lookup(listPath, scope) || [];
+      const frag = document.createDocumentFragment();
+      list.forEach((_, i) => {
+        const inner = [...scope, { name: as, index: i, get: () => (lookup(listPath, scope) || [])[i] }];
+        for (const child of [...node.childNodes]) {
+          const c = child.cloneNode(true);
+          frag.appendChild(c);
+          process(c, inner);
+        }
+      });
+      node.replaceWith(frag);
+      return;
+    }
+    if (tag === 'sc-if') {
+      const path = whole(node.getAttribute('value'));
+      const anchor = document.createComment('if');
+      const kids = [...node.childNodes];
+      node.replaceWith(anchor);
+      kids.forEach((k) => process(k, scope));
+      let shown = false;
+      bindings.push(() => {
+        const on = !!lookup(path, scope);
+        if (on && !shown) { let ref = anchor; kids.forEach((k) => { ref.after(k); ref = k; }); shown = true; }
+        if (!on && shown) { kids.forEach((k) => k.remove()); shown = false; }
+      });
+      return;
+    }
+
+    for (const attr of [...node.attributes]) {
+      if (!attr.value.includes('{{')) continue;
+      const name = attr.name;
+      const tpl = attr.value;
+      if (name.startsWith('on')) {
+        node.removeAttribute(name);
+        const ev = name.slice(2).toLowerCase();
+        const path = whole(tpl);
+        node.addEventListener(ev, (e) => { const fn = lookup(path, scope); if (typeof fn === 'function') fn(e); });
+        continue;
+      }
+      bindings.push(() => { const s = interp(tpl, scope); if (node.getAttribute(name) !== s) node.setAttribute(name, s); });
+    }
+    for (const child of [...node.childNodes]) process(child, scope);
+  }
+
+  function render() { queued = false; vals = comp.renderVals(); bindings.forEach((b) => b()); }
+  function schedule() { if (!queued && comp) { queued = true; requestAnimationFrame(render); } }
+
+  window.mountDC = function (ComponentClass, props, templateEl, host) {
+    comp = new ComponentClass(props);
+    vals = comp.renderVals();
+    const frag = templateEl.content.cloneNode(true);
+    [...frag.childNodes].forEach((n) => process(n, []));
+    host.appendChild(frag);
+    bindings.forEach((b) => b());
+    if (comp.componentDidMount) comp.componentDidMount();
+    return comp;
+  };
+})();
+
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { t: 0, mx: 0, slide: 0, prev: -1 };
+    this.iv = null;
+    this.work = [
+      { desk: 'assets/screens/01-furniture-desktop.jpg', pos: '50% 50%', phone: 'assets/screens/01-furniture-mobile.jpg', alt: 'Furniture store website' },
+      { desk: 'assets/screens/02-crm-desktop.jpg', pos: '50% 50%', phone: 'assets/screens/02-crm-mobile.jpg', alt: 'Sales CRM dashboard' },
+      { desk: 'assets/screens/03-stays-desktop.jpg', pos: '50% 50%', phone: 'assets/screens/03-stays-mobile.jpg', alt: 'Mediterranean stays booking site' },
+      { desk: 'assets/screens/04-projects-desktop.jpg', pos: '50% 50%', phone: 'assets/screens/04-projects-mobile.jpg', alt: 'Project management app' },
+      { desk: 'assets/screens/05-home-services-desktop.jpg', pos: '50% 50%', phone: 'assets/screens/05-home-services-mobile.jpg', alt: 'Kitchen and plumbing services website' }
+    ];
+    this.raf = null;
+    this.start = 0;
+    this.loop = this.loop.bind(this);
+    const D1 = 'M11820 14388 l-685 -6 -2965 -11 -2965 -11 -2353 0 -2353 0 3 -14 3 -14 99 -104 99 -103 151 -155 151 -156 200 -209 200 -210 81 -85 82 -85 42 -45 43 -45 226 -235 227 -235 99 -105 100 -105 10 -11 10 -11 191 -199 192 -199 48 -54 49 -53 32 -14 32 -14 1990 0 1990 0 28 -11 28 -10 30 -31 30 -31 -4 -5647 -4 -5647 12 -7 12 -7 68 73 68 73 43 45 42 45 131 135 132 135 174 185 175 185 155 160 156 161 215 224 215 225 110 115 109 115 136 140 135 141 211 219 211 220 64 69 64 68 19 30 19 29 -6 392 -6 392 -11 465 -11 465 6 580 6 580 4 365 4 365 1 2420 1 2420 9 39 8 38 27 28 27 28 43 11 42 11 4027 -1 4026 0 35 7 34 6 208 216 208 216 115 120 116 121 99 105 100 105 105 110 105 109 156 161 155 160 96 100 95 100 26 28 26 28 183 192 183 192 136 140 136 140 51 54 52 53 0 15 0 14 -267 -2 -268 -2 -3605 4 -3605 4 -685 -7z';
+    const D2 = 'M11954 10006 l-34 -34 0 -2135 0 -2136 11 -7 12 -7 66 71 66 70 75 79 74 78 95 100 95 100 227 235 226 235 114 120 114 120 100 105 99 105 160 165 159 165 101 105 101 105 95 100 94 100 101 105 100 105 231 240 232 240 47 50 47 50 81 85 81 85 100 105 101 105 235 245 235 244 111 116 110 115 99 105 99 105 34 32 34 33 -5 15 -6 15 -2042 0 -2041 0 -34 -34z';
+    this.shapes = [this.parse(D1), this.parse(D2)];
+    // stacked rounded slices give the phone a solid 14px metal body, corners included
+    this.phoneSlices = Array.from({ length: 14 }, (_, i) => {
+      const z = -(i + 0.5);
+      const mid = Math.abs(i - 6.5) / 6.5; // 0 in the middle of the band, 1 at the rims
+      const light = Math.round(70 + 70 * (1 - mid));
+      const c = 'rgb(' + light + ',' + (light + 7) + ',' + (light + 16) + ')';
+      return { z: z, bg: c };
+    });
+    // same trick for the laptop: solid rounded edges with no seams at the corners
+    const band = (n, hi, lo) => Array.from({ length: n }, (_, i) => {
+      const f = i / Math.max(1, n - 1);
+      const v = Math.round(hi + (lo - hi) * f);
+      return { z: -(i + 0.5), bg: 'rgb(' + v + ',' + (v + 7) + ',' + (v + 15) + ')' };
+    });
+    this.lidSlices = band(6, 96, 62);
+    this.baseSlices = band(10, 150, 32);
+    const ones = (n) => Array.from({ length: n }, () => ({ g: 1 }));
+    this.keyRows = [
+      { h: 10, keys: ones(14) },
+      { h: 21, keys: ones(13).concat([{ g: 1.6 }]) },
+      { h: 21, keys: [{ g: 1.6 }].concat(ones(13)) },
+      { h: 21, keys: [{ g: 1.9 }].concat(ones(11), [{ g: 1.9 }]) },
+      { h: 21, keys: [{ g: 2.4 }].concat(ones(10), [{ g: 2.4 }]) },
+      { h: 21, keys: ones(4).concat([{ g: 5.4 }], ones(4)) }
+    ];
+  }
+  parse(d) {
+    // path uses only M, relative l and z; map into the 1975x1389 viewBox
+    const tk = d.match(/[MmLlZz]|-?\d*\.?\d+/g);
+    const tx = (x) => -49.853352 + 0.1 * x;
+    const ty = (y) => 1439.5 - 0.1 * y;
+    let i = 0, cx = 0, cy = 0, sx = 0, sy = 0, cmd = 'M';
+    const raw = [];
+    while (i < tk.length) {
+      const k = tk[i];
+      if (/[MmLlZz]/.test(k)) { cmd = k; i++; if (cmd === 'z' || cmd === 'Z') raw.push([sx, sy]); continue; }
+      const a = Number(tk[i]), b = Number(tk[i + 1]); i += 2;
+      if (cmd === 'M') { cx = a; cy = b; sx = a; sy = b; }
+      else if (cmd === 'm' || cmd === 'l') { cx += a; cy += b; }
+      else { cx = a; cy = b; }
+      raw.push([cx, cy]);
+    }
+    const pts = raw.map((p) => [tx(p[0]), ty(p[1])]);
+    const cum = [0];
+    for (let j = 1; j < pts.length; j++) {
+      cum.push(cum[j - 1] + Math.hypot(pts[j][0] - pts[j - 1][0], pts[j][1] - pts[j - 1][1]));
+    }
+    return { pts: pts, cum: cum, total: cum[cum.length - 1] };
+  }
+  partial(s, p) {
+    if (p <= 0) return { str: '', x: s.pts[0][0], y: s.pts[0][1] };
+    const target = p * s.total;
+    const out = [];
+    let hx = s.pts[0][0], hy = s.pts[0][1];
+    for (let j = 0; j < s.pts.length; j++) {
+      if (s.cum[j] <= target) {
+        out.push(s.pts[j][0].toFixed(1) + ',' + s.pts[j][1].toFixed(1));
+        hx = s.pts[j][0]; hy = s.pts[j][1];
+      } else {
+        const seg = s.cum[j] - s.cum[j - 1] || 1;
+        const f = (target - s.cum[j - 1]) / seg;
+        hx = s.pts[j - 1][0] + (s.pts[j][0] - s.pts[j - 1][0]) * f;
+        hy = s.pts[j - 1][1] + (s.pts[j][1] - s.pts[j - 1][1]) * f;
+        out.push(hx.toFixed(1) + ',' + hy.toFixed(1));
+        break;
+      }
+    }
+    return { str: out.join(' '), x: hx, y: hy };
+  }
+  componentDidMount() {
+    if (this.props.freeze == null) this.run();
+    // background "video" clock: runs continuously, ~30 fps
+    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (this.props.freeze == null && !reduce) {
+      const t0 = performance.now();
+      let last = 0;
+      const tick = (now) => {
+        if (now - last > 33) { last = now; this.setState({ bg: (now - t0) / 1000 }); }
+        this.bgRaf = requestAnimationFrame(tick);
+      };
+      this.bgRaf = requestAnimationFrame(tick);
+    }
+  }
+  componentWillUnmount() {
+    if (this.bgRaf) cancelAnimationFrame(this.bgRaf);
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.iv) clearInterval(this.iv);
+  }
+  startCarousel() {
+    if (this.iv) clearInterval(this.iv);
+    const n = this.work.length;
+    this.iv = setInterval(() => {
+      this.setState((s) => ({ prev: s.slide, slide: (s.slide + 1) % n }));
+    }, 3200);
+  }
+  run() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    if (this.iv) { clearInterval(this.iv); this.iv = null; }
+    this.start = performance.now();
+    this.setState({ t: 0, slide: 0, prev: -1 });
+    this.raf = requestAnimationFrame(this.loop);
+  }
+  loop(now) {
+    const speed = Number(this.props.speed ?? 1.2) || 1.2;
+    const t = (now - this.start) * speed;
+    this.setState({ t: t });
+    if (t < 7600) this.raf = requestAnimationFrame(this.loop);
+    else { this.raf = null; this.startCarousel(); }
+  }
+  renderVals() {
+    const t = this.props.freeze != null ? Number(this.props.freeze) : this.state.t;
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const seg = (a, b) => clamp((t - a) / (b - a));
+    const out = (p) => 1 - Math.pow(1 - p, 3);
+    const io = (p) => p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+    const r = (v) => Math.round(v * 1000) / 1000;
+
+    // 1. the mark draws itself, then fills
+    // pen traces only the big T; the small inner triangle simply appears
+    const d1 = io(seg(100, 1350));
+    const a = this.partial(this.shapes[0], d1);
+    const head = a;
+    const drawing = t > 100 && t < 1350;
+    const pen = drawing ? 1 : 0;
+    const fill = seg(1250, 1850);
+    const fill2 = out(seg(1350, 1700));
+    // background video motion: slow push-in + drift, gliding light band, soft flicker
+    const bg = this.state.bg || 0;
+    const ken = 0.5 - 0.5 * Math.cos((2 * Math.PI * bg) / 26);
+    const vidS = r(1.06 + 0.09 * ken);
+    const vidX = r(-2.4 * ken);
+    const vidY = r(-1.1 * ken);
+    const sweepX = r(-30 + 60 * (0.5 - 0.5 * Math.cos((2 * Math.PI * bg) / 28)));
+    const flick = r(0.35 + 0.25 * Math.sin(bg * 0.9) * Math.sin(bg * 2.3 + 1));
+    // background: blueprint grid spreads out from the logo with the pen; blue glow builds with the counter
+    const gridP = out(seg(100, 2000));
+    const gridR = r(gridP * 700);
+    const gridO = r(1 - 0.6 * seg(3400, 3800));
+    const cnt = io(seg(1950, 3450));
+    const glowIn = out(seg(300, 1800));
+    const glowA = r(glowIn * (0.05 + 0.10 * cnt));
+    const glowA2 = r(glowA * 0.35);
+    const glowW = Math.round(360 + 180 * cnt);
+    const glowH = Math.round(glowW * 0.62);
+    const strokeO = 1 - seg(1650, 2050);
+
+    // 2. wordmark rises letter by letter
+    const letters = 'TRIGGE'.split('').map((ch, i) => {
+      const p = out(seg(1350 + i * 70, 2000 + i * 70));
+      return { ch: ch, o: r(p), y: r((1 - p) * 46) };
+    });
+    const sp = out(seg(1750, 2750));
+
+    // 3. progress: ideas -> code -> solutions
+    const count = Math.round(io(seg(1950, 3450)) * 100);
+    const ui = seg(1950, 2350) * (1 - seg(3400, 3700));
+    const idx = count < 34 ? 0 : count < 67 ? 1 : 2;
+    const labels = ['IDEAS', 'CODE', 'SOLUTIONS'];
+    const words = labels.map((l, i) => ({
+      label: l,
+      color: i <= idx ? '#ffffff' : '#3b4046',
+      arrow: i < 2,
+      arrowColor: i < idx ? '#9dbaf0' : '#3b4046'
+    }));
+
+    // 4. exit: curtain lifts, logo flies to the nav
+    const exit = io(seg(3650, 4650));
+    const edgeO = exit > 0 && exit < 1 ? Math.sin(exit * Math.PI) : 0;
+
+    // 5. hero settles in
+    const heroScale = r(1.12 - 0.12 * out(seg(3650, 5550)));
+    const item = (k, base) => out(seg(base + k * 110, base + 750 + k * 110));
+    const vals = {};
+    for (let k = 0; k < 6; k++) {
+      const p = item(k, 4150);
+      vals['h' + k] = r(p);
+      vals['h' + k + 'y'] = r((1 - p) * 26);
+    }
+    for (let k = 0; k < 5; k++) {
+      const p = item(k, 4400);
+      vals['n' + k] = r(p);
+      vals['n' + k + 'y'] = r((1 - p) * -12);
+    }
+    // 6. laptop arrives closed, lid swings open, screen wakes up
+    const lidEase = io(seg(4900, 6000));
+    const lid = r(-90 + 100 * lidEase);
+    const lidShade = r(clamp((lidEase - 0.2) / 0.6));
+    const gx = 22 + this.state.mx * 6;
+    // 8. portfolio carousel: each screen scrolls up to the next project, phone follows a beat later
+    const cur = this.state.slide, prv = this.state.prev;
+    const ease = 'cubic-bezier(0.65, 0, 0.35, 1)';
+    const place = (i, delay) => {
+      if (i === cur) return { y: 0, tr: 'transform 950ms ' + ease + ' ' + delay + 'ms' };
+      if (i === prv) return { y: -100, tr: 'transform 950ms ' + ease + ' ' + delay + 'ms' };
+      return { y: 100, tr: 'none' };
+    };
+    const deskSlides = this.work.map((w, i) => Object.assign({ src: w.desk, pos: w.pos, alt: w.alt + ' on the laptop' }, place(i, 0)));
+    const phoneSlides = [];
+    this.work.forEach((w, i) => {
+      if (w.phone) phoneSlides.push(Object.assign({ src: w.phone, alt: w.alt + ' on the phone' }, place(i, 140)));
+    });
+    // 7. phone slides out from behind the screen, then steps forward
+    // slides out sideways, then settles level with the screen, floating above the floor
+    const ph1 = io(seg(6000, 6900));
+    const ph2 = io(seg(6600, 7100));
+    const phX = r(300 + 195 * ph1);
+    const phZ = r(-75 + 120 * ph2);
+    const phR = -10;
+    const phO = r(seg(6000, 6200));
+    const phShadow = r(seg(6300, 7000));
+    const scr = out(seg(5600, 6300));
+    const lineP = (k) => r((1 - out(seg(4200 + k * 120, 5000 + k * 120))) * 110);
+
+    return Object.assign(vals, {
+      p1: a.str, fill2: r(fill2), vidS: vidS, vidX: vidX, vidY: vidY, sweepX: sweepX, flick: flick,gridR: gridR, gridR2: r(gridR + 260), gridO: gridO, glowA: glowA, glowA2: glowA2, glowW: glowW, glowH: glowH,hx: r(head.x), hy: r(head.y),
+      pen: pen, penGlow: pen * 0.35,
+      fill: r(fill), strokeO: r(strokeO),
+      letters: letters,
+      solSpacing: r(0.95 - 0.53 * sp), solO: r(sp),
+      count: count, countText: String(count).padStart(3, '0'),
+      ui: r(ui), words: words,
+      curtain: r(exit * 100),
+      edgeY: r((1 - exit) * 810), edgeO: r(edgeO),
+      lx: r(-366 * exit), ly: r(-308 * exit), ls: r(1 - 0.64 * exit),
+      heroScale: heroScale,
+      lid: lid, screenOn: r(scr), screenScale: r(1.06 - 0.06 * scr),
+      tiltY: r(-22 + this.state.mx * 5),
+      lidShade: lidShade, keyRows: this.keyRows,
+      deskSlides: deskSlides, phoneSlides: phoneSlides,
+      phoneSlices: this.phoneSlices, lidSlices: this.lidSlices, baseSlices: this.baseSlices,
+      phX: phX, phZ: phZ, phR: phR, phO: phO, phShadow: phShadow,
+      glareA: r(gx), glareB: r(gx + 10), glareC: r(gx + 26), glareD: r(gx + 40),
+      onMove: (e) => {
+        const b = e.currentTarget.getBoundingClientRect();
+        const mx = ((e.clientX - b.left) / b.width) * 2 - 1;
+        if (Math.abs(mx - this.state.mx) > 0.02) this.setState({ mx: mx });
+      },
+      l0: lineP(0), l1: lineP(1), l2: lineP(2),
+      showReplay: this.props.freeze == null && t > 7200,
+      replay: () => this.run()
+    });
+  }
+}
+
+(function () {
+  var fit = document.getElementById('fit');
+  function resize() {
+    var s = Math.min(window.innerWidth / 1440, window.innerHeight / 810);
+    fit.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', resize); resize();
+  // speed 1.2 = the approved timing (the design's timeline numbers are divided by 1.2)
+  document.fonts.ready.then(function () { mountDC(Component, { speed: 1.2 }, document.getElementById('scene'), fit); });
+})();
+</script>
+</body>
+</html>

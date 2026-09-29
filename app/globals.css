@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lets the border beam's angle animate smoothly. Browsers without @property
+   show the beam standing still, which still reads as a highlight. */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes beam {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-navy-900 antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent/40 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-navy-700;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy-600;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-6 lg:px-10;
+  }
+
+  .glass {
+    @apply border border-white/10 bg-white/[0.04] backdrop-blur-md;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-accent-light to-accent bg-clip-text text-transparent;
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Same grid in the accent colour, for lighting up around the cursor. */
+  .grid-pattern-accent {
+    background-image:
+      linear-gradient(rgba(127, 176, 240, 0.22) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127, 176, 240, 0.22) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-navy-950 transition duration-300 hover:bg-accent-light hover:shadow-lg hover:shadow-accent/20;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/25 px-6 py-3.5 text-sm font-semibold text-white transition duration-300 hover:border-white/50 hover:bg-white/10;
+  }
+
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-navy-950 px-6 py-3.5 text-sm font-semibold text-white transition duration-300 hover:bg-navy-800;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.25em] text-accent;
+  }
+
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  /* Glow that follows the cursor; the card sets --mx / --my on pointermove. */
+  .spotlight {
+    background: radial-gradient(
+      380px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(127, 176, 240, 0.14),
+      transparent 45%
+    );
+  }
+
+  /* The same glow, masked down to a 1px ring so it lights up the border. */
+  .spotlight-border {
+    padding: 1px;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(76, 127, 196, 0.75),
+      transparent 60%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* A comet of light running around a card's border, one lap per 5s. */
+  .border-beam {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--beam-angle),
+      transparent 0%,
+      transparent 68%,
+      rgba(127, 176, 240, 0.9) 90%,
+      #ffffff 97%,
+      transparent 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: beam 5s linear infinite;
+  }
+
+  /* A soft highlight over images that follows the cursor. */
+  .glare {
+    background: radial-gradient(
+      520px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, 0.22),
+      transparent 40%
+    );
+  }
+}
+
+/* First-visit intro (see components/Hero.tsx and HeroScene.tsx). While
+   <html data-intro> is set the loader shows; the header hides its logo until
+   the flying one lands, and its links drop in one after another. */
+.intro-loader {
+  display: none;
+}
+html[data-intro] .intro-loader {
+  display: block;
+}
+/* Keeps the scrollbar's space while it is hidden, so the header (and the
+   logo slot the intro lands on) doesn't shift when it comes back. */
+html[data-intro="play"] {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+html[data-intro="play"] [data-intro-nav] {
+  opacity: 0;
+}
+html[data-intro="nav"] [data-intro-nav],
+html[data-intro="logo"] [data-intro-nav] {
+  animation: intro-nav 625ms cubic-bezier(0.33, 1, 0.68, 1) both;
+  animation-delay: calc(var(--i, 0) * 92ms);
+}
+[data-intro-logo] {
+  transition: opacity 250ms ease-out;
+}
+html[data-intro="play"] [data-intro-logo],
+html[data-intro="nav"] [data-intro-logo] {
+  opacity: 0;
+}
+@keyframes intro-nav {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

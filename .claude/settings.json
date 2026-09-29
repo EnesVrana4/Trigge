@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 3116 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"stopped server\" } else { \"port 3116 already free\" })",
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 3117 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"stopped server\" } else { \"port 3117 already free\" })",
+      "Bash(curl -s -o /dev/null http://localhost:3118/)",
+      "Bash(curl -s http://localhost:3118/)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 Chrome/120.0 Safari/537.36\" -L --max-time 25 \"https://www.linkedin.com/in/trigge-solutions-7a1b1b438/\")",
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 3118 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"stopped server\" } else { \"port 3118 already free\" })",
+      "Bash(curl -s -o /dev/null http://localhost:3119/)",
+      "Bash(curl -s http://localhost:3119/)",
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 3119 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; \"stopped server\" } else { \"port 3119 already free\" })",
+      "PowerShell($c = Get-NetTCPConnection -LocalPort 3123 -State Listen -ErrorAction SilentlyContinue; if \\($c\\) { $c | ForEach-Object { taskkill /PID $_.OwningProcess /T /F } } else { \"no server on 3123\" })"
+    ]
+  }
+}
