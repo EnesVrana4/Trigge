@@ -21,7 +21,7 @@ export default function TrustBar() {
     <section className="border-y border-slate-100 bg-[#f7f9fc] py-12">
       <div className="container-page">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-400">
-          Trusted by businesses across various industries
+          Digital products for a range of industries
         </p>
 
         <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">

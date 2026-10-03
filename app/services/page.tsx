@@ -12,20 +12,11 @@ const PAGE = {
   path: "/services",
   title: "Web Development & Custom Software Services",
   description:
-    "Web development, custom web applications, e-commerce, UI/UX design, API integrations and ongoing support for businesses in the United States and Canada.",
+    "Web development, custom web applications, e-commerce, UI/UX design, API integrations and ongoing support for businesses in the United States.",
 };
 
 export const metadata: Metadata = pageMeta({
   ...PAGE,
-  keywords: [
-    "web development services",
-    "custom web application development",
-    "e-commerce website development",
-    "UI UX design agency",
-    "API integration services",
-    "website maintenance services",
-    "software development services USA Canada",
-  ],
 });
 
 export default function ServicesPage() {

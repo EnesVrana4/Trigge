@@ -48,7 +48,7 @@ function ServiceCard({
   detailed: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [seen, setSeen] = useState(false);
+  const [seen, setSeen] = useState(true);
   const [motion, setMotion] = useState(true);
   const [filled, setFilled] = useState(false);
   const [centered, setCentered] = useState(false);
@@ -64,6 +64,8 @@ function ServiceCard({
       setSeen(true);
       return;
     }
+
+    if (el.getBoundingClientRect().top >= window.innerHeight) setSeen(false);
 
     const reveal = new IntersectionObserver(
       ([entry]) => {
@@ -190,14 +192,14 @@ function ServiceCard({
           </ul>
         )}
 
-        {!detailed && (
+        {(
           <Link
-            href="/services"
+            href={`/services/${service.slug}`}
             className={`relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold transition-all duration-300 ${
               filled ? "gap-3 text-accent" : "text-navy-900"
             }`}
           >
-            Learn more <ArrowRight size={15} />
+            Explore {service.title.toLowerCase()} <ArrowRight size={15} />
           </Link>
         )}
       </article>

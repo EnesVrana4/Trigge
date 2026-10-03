@@ -2,12 +2,12 @@
 
 > Software development company based in Pennsylvania, United States, building
 > custom websites, web applications, e-commerce platforms and internal tools for
-> businesses across all 50 U.S. states and Canada. Every project starts with a
+> businesses across the United States. Every project starts with a
 > free consultation and a fixed written quote, and the client owns the code.
 
 - Website: https://triggesolutions.com
 - Contact: trigge.info@gmail.com | https://triggesolutions.com/contact
-- Based in: Pennsylvania, USA
+- Based in: Croydon, Pennsylvania, near Philadelphia
 - Serves: United States (all 50 states) and Canada, in every time zone
 - Languages: English
 
@@ -52,14 +52,13 @@ timeline with milestones follows the discovery call.
 
 **How much does it cost?** Every project is quoted individually after a free
 consultation, as a fixed written quote with a clear breakdown and no hidden
-costs. Typical project budgets range from under $5,000 to $40,000 and above.
+costs. Scope and requirements determine the project budget.
 
 **Who owns the code?** The client does. On final delivery they receive the source
 code, the repository and all related accounts and documentation.
 
 **Do you work remotely across the U.S. and Canada?** Yes. Work runs through
-regular calls, a shared project board and a live staging link, in every time zone
-from Newfoundland to Hawaii.
+regular calls, a shared project board and a live staging link, with scheduled calls and shared project updates.
 
 **Can you take over an existing project?** Yes. Existing codebases are audited,
 fixed and extended, starting with a technical review of what is worth keeping.
@@ -71,5 +70,11 @@ updates, backups and ongoing improvements; support is also available on demand.
 
 - [Home](https://triggesolutions.com/): overview of services and process.
 - [Services](https://triggesolutions.com/services): detailed service list and stack.
+- [Website development](https://triggesolutions.com/services/website-development): business websites, CMS and launch planning.
+- [Web applications](https://triggesolutions.com/services/web-application-development): portals, dashboards and internal tools.
+- [Ecommerce development](https://triggesolutions.com/services/ecommerce-development): catalogs, checkout and store operations.
+- [UI/UX design](https://triggesolutions.com/services/ui-ux-design): user flows, prototypes and interface design.
+- [API integrations](https://triggesolutions.com/services/api-integrations): connecting business systems and workflows.
+- [Maintenance](https://triggesolutions.com/services/maintenance-support): application reviews, updates and support.
 - [About](https://triggesolutions.com/about): the team, values and how work runs.
 - [Contact](https://triggesolutions.com/contact): project form and free consultation.

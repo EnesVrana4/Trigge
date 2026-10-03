@@ -8,6 +8,7 @@ export type ServiceKey =
 
 export const SERVICES: {
   key: ServiceKey;
+  slug: string;
   title: string;
   short: string;
   description: string;
@@ -15,6 +16,7 @@ export const SERVICES: {
 }[] = [
   {
     key: "web",
+    slug: "website-development",
     title: "Web Development",
     short: "Fast, secure and scalable websites.",
     description:
@@ -28,6 +30,7 @@ export const SERVICES: {
   },
   {
     key: "apps",
+    slug: "web-application-development",
     title: "Web Applications",
     short: "Custom platforms built around your workflow.",
     description:
@@ -41,6 +44,7 @@ export const SERVICES: {
   },
   {
     key: "ecommerce",
+    slug: "ecommerce-development",
     title: "E-Commerce",
     short: "Online stores that convert visitors into buyers.",
     description:
@@ -54,6 +58,7 @@ export const SERVICES: {
   },
   {
     key: "design",
+    slug: "ui-ux-design",
     title: "UI/UX Design",
     short: "Interfaces people understand instantly.",
     description:
@@ -67,6 +72,7 @@ export const SERVICES: {
   },
   {
     key: "integrations",
+    slug: "api-integrations",
     title: "Integrations & APIs",
     short: "Connect the tools you already use.",
     description:
@@ -80,6 +86,7 @@ export const SERVICES: {
   },
   {
     key: "support",
+    slug: "maintenance-support",
     title: "Maintenance & Support",
     short: "We stay with you after launch.",
     description:
@@ -234,7 +241,7 @@ export const VALUES = [
   {
     title: "Partnership",
     description:
-      "We think long term. Most of our work comes from clients who come back with the next idea.",
+      "We plan for what comes next, with maintainable code, a clear handover and support as your business grows.",
   },
 ];
 
@@ -290,9 +297,9 @@ export const FAQS = [
       "Every project is quoted individually based on scope. After a free consultation you receive a fixed written quote with a clear breakdown, no hidden costs added later.",
   },
   {
-    question: "Do you work with clients outside Pennsylvania and in Canada?",
+    question: "Do you serve businesses outside Pennsylvania?",
     answer:
-      "Yes. We are based in Croydon, PA, just outside Philadelphia, and work with clients in all 50 states and across Canada, in every time zone. Weekly demos, a shared project board and a live staging link keep remote projects moving exactly as they would locally.",
+      "Yes. We are based in Croydon, Pennsylvania, near Philadelphia, and serve businesses across the United States. Scheduled calls, a shared project board and a live staging link help you follow progress wherever your team works. We also welcome inquiries from Canada.",
   },
   {
     question: "What technologies do you build with?",
@@ -307,7 +314,7 @@ export const FAQS = [
   {
     question: "Can you take over an existing project?",
     answer:
-      "Absolutely. We regularly audit, fix and extend existing codebases. We start with a technical review and tell you honestly what is worth keeping and what should be rebuilt.",
+      "Yes. We can audit, fix and extend existing codebases. We start with a technical review and explain what is worth keeping and what should be rebuilt.",
   },
   {
     question: "What happens after launch?",
@@ -337,5 +344,5 @@ export const SOCIAL_LINKS = {
 
 export const CONTACT = {
   email: "trigge.info@gmail.com",
-  location: "Pennsylvania, USA",
+  location: "Croydon, Pennsylvania, near Philadelphia",
 };

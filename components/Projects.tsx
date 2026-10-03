@@ -24,7 +24,7 @@ export default function Projects() {
           <SectionHeading
             eyebrow="Capabilities"
             title="Products we build"
-            description="The kinds of platforms we design and develop end to end. Yours would be built from scratch around your own requirements, never from a template."
+            description="Illustrative concepts showing the kinds of platforms we can build. These previews are examples of capabilities, not completed client projects. Your product would be designed around your own requirements."
             action={
               PORTFOLIO_ENABLED ? (
                 <Link

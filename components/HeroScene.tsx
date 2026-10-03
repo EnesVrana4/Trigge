@@ -505,27 +505,20 @@ export default function HeroScene({ fontClass }: { fontClass: string }) {
 
       <div className="container-page relative grid items-center gap-14 pb-20 pt-32 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-16 lg:pt-28">
         <div>
-          <p
-            className="mb-5 font-montserrat text-xs font-semibold tracking-[0.24em] text-[#9aa1aa]"
-            style={rise(0)}
-          >
-            IDEAS → CODE → SOLUTIONS
-          </p>
-
-          <h1 className="text-[2.5rem] font-bold leading-[1.05] tracking-[-0.02em] sm:text-5xl lg:text-[3.25rem] lg:leading-none xl:text-6xl xl:leading-none">
+          <h1 className="text-[2rem] font-bold leading-[1.12] tracking-[-0.02em] sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]">
             <span className="block overflow-hidden">
               <span className="block" style={line(0)}>
-                Custom Software
+                Your Business.
               </span>
             </span>{" "}
             <span className="block overflow-hidden">
               <span className="block" style={line(1)}>
-                Solutions for Your
+                Your Vision.
               </span>
             </span>{" "}
             <span className="block overflow-hidden pb-1.5">
               <span className="block text-[#9dbaf0]" style={line(2)}>
-                Business
+                Built with Precision.
               </span>
             </span>
           </h1>
@@ -537,8 +530,8 @@ export default function HeroScene({ fontClass }: { fontClass: string }) {
             className="mt-[22px] max-w-[470px] text-base font-medium leading-7 text-[#b9bfc7] sm:text-[17px]"
             style={rise(3)}
           >
-            We build modern websites, web applications and digital platforms that help your
-            business grow, work smarter and stay ahead of the competition.
+            Custom website and web application development from Pennsylvania,
+            serving businesses across the United States.
           </p>
 
           <div className="mt-[34px] flex flex-col gap-4 sm:flex-row" style={rise(4)}>

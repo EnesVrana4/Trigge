@@ -32,8 +32,8 @@ export default function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-white/50">
-              Innovative software solutions for a smarter tomorrow. Based in
-              Croydon, PA, serving businesses across the U.S. and Canada.
+              Custom websites and web applications. Based in Pennsylvania,
+              serving businesses across the United States.
             </p>
             <div className="mt-5 flex gap-3">
               {SOCIALS.map(({ Icon, label, href }) => (
@@ -73,7 +73,7 @@ export default function Footer() {
               {SERVICES.map((service) => (
                 <li key={service.key}>
                   <Link
-                    href="/services"
+                    href={`/services/${service.slug}`}
                     className="transition-colors hover:text-white"
                   >
                     {service.title}

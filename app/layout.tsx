@@ -14,32 +14,22 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://triggesolutions.com"),
+  metadataBase: new URL(SITE_URL),
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   title: {
-    default: "Trigge Solutions | Custom Software Development, U.S. & Canada",
+    default: "Trigge Solutions | Website & Web App Development",
     template: "%s | Trigge Solutions",
   },
   description:
-    "Custom websites, web applications and e-commerce platforms for businesses across the United States and Canada. Free consultation and a fixed written quote.",
-  keywords: [
-    "custom software development company",
-    "web development company USA",
-    "web development company Canada",
-    "custom web application development",
-    "e-commerce website development",
-    "hire Next.js developers",
-    "React development agency",
-    "API integration services",
-    "software company Pennsylvania",
-    "web design agency Philadelphia",
-  ],
+    "Custom websites, web applications and e-commerce platforms for businesses across the United States. Free consultation and a fixed written quote.",
   authors: [{ name: "Trigge Solutions", url: SITE_URL }],
   creator: "Trigge Solutions",
   publisher: "Trigge Solutions",
   category: "Software development",
   alternates: {
     canonical: SITE_URL,
-    languages: { "en-US": SITE_URL, "en-CA": SITE_URL, "x-default": SITE_URL },
   },
   robots: {
     index: true,
@@ -50,16 +40,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Trigge Solutions",
-    title: "Trigge Solutions | Custom Software Development, U.S. & Canada",
+    title: "Trigge Solutions | Website & Web App Development",
     description:
-      "Custom websites, web applications and e-commerce platforms for businesses across the United States and Canada.",
+      "Custom websites, web applications and e-commerce platforms for businesses across the United States.",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Trigge Solutions" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Trigge Solutions | Custom Software Development, U.S. & Canada",
+    title: "Trigge Solutions | Website & Web App Development",
     description:
-      "Custom websites, web applications and e-commerce platforms for businesses across the United States and Canada.",
+      "Custom websites, web applications and e-commerce platforms for businesses across the United States.",
     images: [OG_IMAGE],
   },
 };

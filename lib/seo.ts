@@ -15,20 +15,17 @@ const url = (path: string) => `${SITE_URL}${path === "/" ? "" : path}`;
 
 /**
  * Page metadata with the pieces search engines look for: a canonical URL, a
- * title without the brand repeated twice, and social cards. `alternates`
- * marks the pages as equally meant for U.S. and Canadian readers.
+ * title without the brand repeated twice, and social cards.
  */
 export function pageMeta({
   title,
   description,
   path,
-  keywords,
   absolute = false,
 }: {
   title: string;
   description: string;
   path: string;
-  keywords?: string[];
   /** Set on the home page, whose title already carries the brand. */
   absolute?: boolean;
 }): Metadata {
@@ -36,10 +33,8 @@ export function pageMeta({
   return {
     title: absolute ? { absolute: title } : title,
     description,
-    keywords,
     alternates: {
       canonical,
-      languages: { "en-US": canonical, "en-CA": canonical, "x-default": canonical },
     },
     openGraph: {
       type: "website",
@@ -78,6 +73,7 @@ function organization() {
     image: `${SITE_URL}${OG_IMAGE}`,
     address: {
       "@type": "PostalAddress",
+      addressLocality: "Croydon",
       addressRegion: "Pennsylvania",
       addressCountry: "US",
     },
@@ -102,6 +98,7 @@ function organization() {
           name: service.title,
           description: service.description,
           serviceType: service.title,
+          url: url(`/services/${service.slug}`),
           provider: { "@id": ORGANIZATION_ID },
           areaServed: SERVED,
         },
@@ -125,6 +122,7 @@ function website() {
 
 function breadcrumbs(path: string, title: string) {
   const trail = [{ name: "Home", item: SITE_URL }];
+  if (path.startsWith("/services/")) trail.push({ name: "Services", item: url("/services") });
   if (path !== "/") trail.push({ name: title, item: url(path) });
   return {
     "@type": "BreadcrumbList",
@@ -160,11 +158,13 @@ export function pageSchema({
   title,
   description,
   faq = false,
+  service,
 }: {
   path: string;
   title: string;
   description: string;
   faq?: boolean;
+  service?: (typeof SERVICES)[number];
 }) {
   return {
     "@context": "https://schema.org",
@@ -175,7 +175,7 @@ export function pageSchema({
         "@type": "WebPage",
         "@id": `${url(path)}#webpage`,
         url: url(path),
-        name: `${title} | ${BRAND}`,
+        name: title.includes(BRAND) ? title : `${title} | ${BRAND}`,
         description,
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": ORGANIZATION_ID },
@@ -183,6 +183,17 @@ export function pageSchema({
         breadcrumb: { "@id": `${url(path)}#breadcrumb` },
       },
       breadcrumbs(path, title),
+      ...(service ? [{
+        "@type": "Service",
+        "@id": `${url(path)}#service`,
+        name: title,
+        description,
+        url: url(path),
+        serviceType: service.title,
+        provider: { "@id": ORGANIZATION_ID },
+        areaServed: SERVED,
+        mainEntityOfPage: { "@id": `${url(path)}#webpage` },
+      }] : []),
       ...(faq ? [faqPage(path)] : []),
     ],
   };

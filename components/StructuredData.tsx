@@ -1,3 +1,4 @@
+import { SERVICES } from "@/lib/data";
 import { pageSchema } from "@/lib/seo";
 
 /**
@@ -10,6 +11,7 @@ export default function StructuredData(props: {
   title: string;
   description: string;
   faq?: boolean;
+  service?: (typeof SERVICES)[number];
 }) {
   return (
     <script

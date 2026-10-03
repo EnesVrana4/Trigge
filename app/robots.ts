@@ -25,7 +25,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: ["/api/"] },
-      { userAgent: AI_CRAWLERS, allow: "/" },
+      { userAgent: AI_CRAWLERS, allow: "/", disallow: ["/api/"] },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

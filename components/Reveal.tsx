@@ -12,7 +12,8 @@ export default function Reveal({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // Keep content readable in the initial HTML, even if JavaScript fails.
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const el = ref.current;
@@ -22,6 +23,9 @@ export default function Reveal({
       setVisible(true);
       return;
     }
+
+    // Only animate below-the-fold content after JavaScript has initialized.
+    if (el.getBoundingClientRect().top >= window.innerHeight) setVisible(false);
 
     // Fires once the top edge is 40px into view. A fractional threshold would
     // wait for a share of the element's height, so tall blocks sat empty on

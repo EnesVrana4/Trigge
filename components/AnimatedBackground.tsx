@@ -35,6 +35,8 @@ export default function AnimatedBackground({
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    // Keep the small poster on phones; the decorative animation can be 3 MB.
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (wantsLightPage()) return;
 

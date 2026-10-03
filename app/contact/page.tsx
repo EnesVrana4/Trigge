@@ -10,17 +10,11 @@ const PAGE = {
   path: "/contact",
   title: "Contact Us — Free Project Consultation",
   description:
-    "Tell us about your project and get a free consultation with a fixed written quote. We reply within one business day, anywhere in the U.S. or Canada.",
+    "Tell us about your project and get a free consultation with a fixed written quote. We reply within one business day, anywhere in the United States.",
 };
 
 export const metadata: Metadata = pageMeta({
   ...PAGE,
-  keywords: [
-    "free software development consultation",
-    "hire web developers",
-    "website development quote",
-    "contact software company USA Canada",
-  ],
 });
 
 const DETAILS = [

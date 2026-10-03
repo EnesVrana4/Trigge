@@ -226,6 +226,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
   // Honeypot: real visitors never see or fill this field — bots do.
   if (String(payload.website ?? "").trim()) {
     return NextResponse.json({
@@ -258,7 +262,6 @@ export async function POST(request: Request) {
   if (!user || !pass) {
     console.error(
       "[contact] SMTP_USER / SMTP_PASSWORD are not set — message NOT delivered.",
-      { name, email, company, budget, services },
     );
     return NextResponse.json(
       {

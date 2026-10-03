@@ -13,17 +13,11 @@ const PAGE = {
   path: "/about",
   title: "Software Development Team in Pennsylvania",
   description:
-    "Meet the team behind Trigge Solutions: a software studio in Pennsylvania building websites and web platforms for clients in all 50 states and across Canada.",
+    "Meet the team behind Trigge Solutions: a software studio in Pennsylvania building websites and web platforms for businesses across the United States.",
 };
 
 export const metadata: Metadata = pageMeta({
   ...PAGE,
-  keywords: [
-    "software development company Pennsylvania",
-    "web development agency Philadelphia",
-    "software development team",
-    "custom software company near me",
-  ],
 });
 
 const VALUE_ICONS = [Target, Gem, Handshake];
@@ -35,7 +29,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="A small team with a long-term view"
-        description="Trigge Solutions is a software studio based in Croydon, Pennsylvania. We build digital products for businesses that want technology to actually move their work forward, not add to it."
+        description="Trigge Solutions is a software studio based in Croydon, Pennsylvania, near Philadelphia. We build digital products for businesses that want technology to actually move their work forward, not add to it."
         background="/background/about-background.webp"
       />
 
@@ -60,10 +54,9 @@ export default function AboutPage() {
                   and a codebase, that belongs entirely to you.
                 </p>
                 <p>
-                  Today we work with businesses in all 50 states and across
-                  Canada in e-commerce, real estate, healthcare, manufacturing, education
-                  and finance, from single landing pages to platforms used
-                  daily by whole teams.
+                  We serve businesses across the United States, from teams that need
+                  a clear business website to those planning a customer portal or
+                  internal tool. Each project starts with your workflow and goals.
                 </p>
               </div>
               {PORTFOLIO_ENABLED && (

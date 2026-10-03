@@ -16,23 +16,14 @@ import { pageMeta } from "@/lib/seo";
 
 const PAGE = {
   path: "/",
-  title: "Trigge Solutions | Custom Software Development, U.S. & Canada",
+  title: "Trigge Solutions | Website & Web App Development",
   description:
-    "Trigge Solutions builds custom websites, web apps and e-commerce platforms for businesses across the U.S. and Canada. Free consultation, fixed written quote.",
+    "Trigge Solutions builds custom websites, web apps and e-commerce platforms for businesses across the United States. Free consultation, fixed written quote.",
 };
 
 export const metadata: Metadata = pageMeta({
   ...PAGE,
   absolute: true,
-  keywords: [
-    "custom software development company",
-    "web development company USA",
-    "web development company Canada",
-    "custom web application development",
-    "e-commerce website development company",
-    "hire Next.js developers",
-    "small business website design",
-  ],
 });
 
 export default function Home() {
