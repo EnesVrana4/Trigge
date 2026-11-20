@@ -254,9 +254,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const user = process.env.SMTP_USER;
+  const user = process.env.SMTP_USER?.trim();
+  const isGmail = user?.toLowerCase().endsWith("@gmail.com");
   // Google shows app passwords in groups of four; the spaces are not part of it.
-  const pass = process.env.SMTP_PASSWORD?.replace(/\s/g, "");
+  const pass = isGmail ? process.env.SMTP_PASSWORD?.replace(/\s/g, "") : process.env.SMTP_PASSWORD?.trim();
   const to = process.env.CONTACT_TO ?? CONTACT.email;
 
   if (!user || !pass) {
@@ -271,7 +272,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const transporter = nodemailer.createTransport({
+  const host = process.env.SMTP_HOST?.trim() || (isGmail ? undefined : "mail.privateemail.com");
+  const port = Number(process.env.SMTP_PORT) || 465;
+  const transporter = host ? nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } }) : nodemailer.createTransport({
     service: "gmail",
     auth: { user, pass },
   });

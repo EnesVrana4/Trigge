@@ -1,5 +1,5 @@
 /**
- * Verifies the Gmail SMTP credentials in .env.local and sends a test email.
+ * Verifies the SMTP credentials in .env.local (Namecheap Private Email or Gmail) and sends a test email.
  *
  *   node scripts/test-email.js
  */
@@ -20,32 +20,40 @@ for (const line of fs.readFileSync(envPath, "utf8").split("\n")) {
   if (match) process.env[match[1]] = match[2].trim().replace(/^["']|["']$/g, "");
 }
 
-const user = process.env.SMTP_USER;
-const pass = process.env.SMTP_PASSWORD;
-const to = process.env.CONTACT_TO || user;
+const user = process.env.SMTP_USER?.trim();
+const isGmail = user?.toLowerCase().endsWith("@gmail.com");
+const pass = isGmail
+  ? process.env.SMTP_PASSWORD?.replace(/\s/g, "")
+  : process.env.SMTP_PASSWORD?.trim();
+const to = process.env.CONTACT_TO?.trim() || user;
 
 if (!user || !pass) {
   console.error("\n✗ SMTP_USER or SMTP_PASSWORD is missing from .env.local\n");
   process.exit(1);
 }
 
-if (pass.replace(/\s/g, "").length !== 16) {
-  console.warn(
-    `\n⚠ SMTP_PASSWORD is ${pass.length} characters. A Google App Password is 16.`,
-  );
-  console.warn("  Make sure you used an App Password, not your normal Gmail password.\n");
-}
+const host =
+  process.env.SMTP_HOST?.trim() ||
+  (isGmail ? undefined : "mail.privateemail.com");
+const port = Number(process.env.SMTP_PORT) || 465;
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: { user, pass: pass.replace(/\s/g, "") },
-});
+const transporter = host
+  ? nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+    })
+  : nodemailer.createTransport({
+      service: "gmail",
+      auth: { user, pass },
+    });
 
 (async () => {
   try {
-    console.log(`\nVerifying credentials for ${user} ...`);
+    console.log(`\nVerifying credentials for ${user} (${host || "gmail"}) ...`);
     await transporter.verify();
-    console.log("✓ Credentials accepted by Gmail.");
+    console.log("✓ Credentials accepted by mail server.");
 
     console.log(`Sending a test email to ${to} ...`);
     await transporter.sendMail({
@@ -58,15 +66,6 @@ const transporter = nodemailer.createTransport({
     console.log(`✓ Test email sent. Check the inbox of ${to}.\n`);
   } catch (error) {
     console.error("\n✗ Failed:", error.message);
-    if (String(error.message).includes("Username and Password not accepted")) {
-      console.error(
-        "\n  Gmail rejected the login. Usual causes:\n" +
-          "   • You used the normal account password instead of an App Password\n" +
-          "   • 2-Step Verification is not enabled on the account\n" +
-          "   • The App Password was revoked — create a new one at\n" +
-          "     https://myaccount.google.com/apppasswords\n",
-      );
-    }
     process.exit(1);
   }
 })();
