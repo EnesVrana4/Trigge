@@ -32,7 +32,7 @@ export default function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-white/50">
-              Custom websites and web applications. Based in Pennsylvania,
+              Custom websites and web applications. Based near Philadelphia, PA,
               serving businesses across the United States.
             </p>
             <div className="mt-5 flex gap-3">

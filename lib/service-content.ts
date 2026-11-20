@@ -17,8 +17,8 @@ type ServiceContent = {
 export const SERVICE_CONTENT: Record<ServiceKey, ServiceContent> = {
   web: {
     title: "Custom Website Development",
-    description: "Custom website development for U.S. businesses. Responsive design, CMS integration and a clear launch process from our Pennsylvania team.",
-    introduction: "Your website should help someone understand your business and take the next step. We design and develop business websites with clear service information, responsive layouts and straightforward ways to inquire. From our base in Croydon, Pennsylvania, near Philadelphia, we work with businesses across the United States.",
+    description: "Custom website development near Philadelphia, PA for U.S. businesses. Responsive design, CMS integration and a clear launch process from our Pennsylvania team.",
+    introduction: "Your website should help someone understand your business and take the next step. We design and develop business websites with clear service information, responsive layouts and straightforward ways to inquire. From our base in Croydon, Pennsylvania, near Philadelphia, we work with businesses across Greater Philadelphia and the United States.",
     fit: "A custom website is a good fit when a template makes your services hard to explain, your team struggles to update pages, or an existing site no longer reflects your business. For a simple requirement, we can also discuss whether improving your current site would be more practical than replacing it.",
     deliverables: [
       { title: "Business websites and landing pages", text: "Pages organized around your services, customers and next steps, with mobile layouts, clear navigation and inquiry forms. We agree on the page structure before design begins." },
@@ -36,8 +36,8 @@ export const SERVICE_CONTENT: Record<ServiceKey, ServiceContent> = {
   },
   apps: {
     title: "Custom Web Application Development",
-    description: "Custom web applications, client portals and internal tools for U.S. businesses. Plan, build and launch with our Pennsylvania development team.",
-    introduction: "When spreadsheets, email threads and disconnected tools make everyday work harder, a web application can bring the right information into one place. We build browser-based software around your workflow, from customer portals to internal dashboards, with clear roles and a staged delivery plan.",
+    description: "Custom web applications, client portals and internal tools from Greater Philadelphia, PA for U.S. businesses. Plan, build and launch with our Pennsylvania development team.",
+    introduction: "When spreadsheets, email threads and disconnected tools make everyday work harder, a web application can bring the right information into one place. Based near Philadelphia, PA, we build browser-based software around your workflow, from customer portals to internal dashboards, with clear roles and a staged delivery plan.",
     fit: "Custom development makes sense when an important workflow cannot be handled well by existing software. We start by understanding who uses the system, what they need to do and where the current process breaks down. If an off-the-shelf product can solve the problem adequately, that belongs in the discussion too.",
     deliverables: [
       { title: "Client and customer portals", text: "Secure account areas for documents, requests, project updates or account information. We define what each user can see and do, then design the customer and administrator journeys together." },
@@ -55,8 +55,8 @@ export const SERVICE_CONTENT: Record<ServiceKey, ServiceContent> = {
   },
   ecommerce: {
     title: "Ecommerce Website Development",
-    description: "Custom ecommerce development for U.S. businesses, from product catalogs and checkout to payments, inventory connections and ongoing support.",
-    introduction: "An online store needs to work for both the customer buying a product and the team fulfilling the order. We build ecommerce websites around your catalog, checkout and operational needs, with responsive product pages and a clear plan for payments and order handling.",
+    description: "Custom ecommerce development from Greater Philadelphia, PA for U.S. businesses, from product catalogs and checkout to payments, inventory connections and support.",
+    introduction: "An online store needs to work for both the customer buying a product and the team fulfilling the order. From our studio near Philadelphia, Pennsylvania, we build ecommerce websites around your catalog, checkout and operational needs for businesses across Greater Philadelphia and the United States.",
     fit: "This service suits businesses whose products, checkout requirements or existing systems need more flexibility than their current storefront provides. Before recommending a custom build, we review your catalog, current platform and fulfillment process to establish which parts actually need custom development.",
     deliverables: [
       { title: "Catalog and shopping experience", text: "Product pages, browsing, cart and mobile layouts shaped around your catalog. Product variants, filtering and search are scoped according to the way customers select your products." },
@@ -74,8 +74,8 @@ export const SERVICE_CONTENT: Record<ServiceKey, ServiceContent> = {
   },
   design: {
     title: "UI/UX Design for Websites & Web Apps",
-    description: "UI/UX design for business websites and web applications. User flows, wireframes, prototypes and reusable interfaces from our Pennsylvania team.",
-    introduction: "Good interface design helps people find information and complete tasks without unnecessary friction. We design websites and web applications around the people using them, translating business requirements into user flows, wireframes and clear visual interfaces.",
+    description: "UI/UX design for business websites and web applications. User flows, wireframes, prototypes and reusable interfaces from our Greater Philadelphia, PA team.",
+    introduction: "Good interface design helps people find information and complete tasks without unnecessary friction. Based near Philadelphia, PA, we design websites and web applications around the people using them, translating business requirements into user flows, wireframes and clear visual interfaces for teams across the U.S.",
     fit: "Design work is useful before a new build or when an existing product is confusing to navigate. It can help you resolve complicated forms, inconsistent screens or unclear next steps before investing in development. The scope can cover a whole product or a focused workflow.",
     deliverables: [
       { title: "User flows and wireframes", text: "A map of the key tasks and the screens needed to complete them. Early layouts focus on information and behavior so important decisions are made before visual polish." },
@@ -93,8 +93,8 @@ export const SERVICE_CONTENT: Record<ServiceKey, ServiceContent> = {
   },
   integrations: {
     title: "API Integration Services",
-    description: "API integration services connecting websites, CRMs, payment providers and business tools. Custom workflows and data sync for U.S. businesses.",
-    introduction: "When your systems do not share information, your team ends up copying records and checking for mistakes. We connect websites and business applications through supported APIs, with clear rules for what moves, when it moves and what happens when something fails.",
+    description: "API integration services connecting websites, CRMs, payment providers and business tools. Custom workflows and data sync from our Philadelphia-area team for U.S. businesses.",
+    introduction: "When your systems do not share information, your team ends up copying records and checking for mistakes. From our base near Philadelphia, Pennsylvania, we connect websites and business applications through supported APIs, with clear rules for what moves, when it moves and what happens when something fails.",
     fit: "An integration can help when leads need to reach your CRM, payment events need to update an account, or orders need to move into an operational system. We first verify the available APIs, permissions and account requirements before promising a connection.",
     deliverables: [
       { title: "CRM and business system connections", text: "Connections between forms, customer records and operational tools. We define field mapping, duplicate handling and which system is responsible for each record before data starts moving." },
@@ -112,8 +112,8 @@ export const SERVICE_CONTENT: Record<ServiceKey, ServiceContent> = {
   },
   support: {
     title: "Website & Web Application Maintenance",
-    description: "Website and web application maintenance for U.S. businesses. Code reviews, updates, bug fixes and performance improvements for React and Next.js projects.",
-    introduction: "A website or application needs attention after launch as dependencies change and the business evolves. We offer maintenance and support for websites and web applications, with an agreed scope for updates, fixes and ongoing improvements.",
+    description: "Website and web application maintenance from Greater Philadelphia, PA for U.S. businesses. Code reviews, updates, bug fixes and performance tuning for React and Next.js.",
+    introduction: "A website or application needs attention after launch as dependencies change and the business evolves. Based near Philadelphia, PA, we offer maintenance and support for websites and web applications across the United States, with an agreed scope for updates, fixes and ongoing improvements.",
     fit: "Support can suit teams without an in-house developer or businesses taking over an existing codebase. We begin with a technical review of the repository, hosting and dependencies so the support plan reflects the actual condition of the project.",
     deliverables: [
       { title: "Codebase review and takeover", text: "A review of the application structure, build process and known issues. We identify access requirements and technical constraints before recommending a maintenance plan or a larger repair project." },

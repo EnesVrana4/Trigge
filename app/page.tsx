@@ -18,7 +18,7 @@ const PAGE = {
   path: "/",
   title: "Trigge Solutions | Website & Web App Development",
   description:
-    "Trigge Solutions builds custom websites, web apps and e-commerce platforms for businesses across the United States. Free consultation, fixed written quote.",
+    "Based near Philadelphia, PA, Trigge Solutions builds custom websites, web apps and e-commerce platforms for businesses in Greater Philadelphia and across the United States. Free consultation, fixed written quote.",
 };
 
 export const metadata: Metadata = pageMeta({

@@ -3,7 +3,7 @@ import { PORTFOLIO_ENABLED, SERVICES } from "@/lib/data";
 import { SITE_URL } from "@/lib/seo";
 
 // Deliberate content revision dates, never the build timestamp.
-const CONTENT_UPDATED = "2026-10-03";
+const CONTENT_UPDATED = "2026-11-20";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = ["/", "/services", "/about", "/contact", ...SERVICES.map(({ slug }) => `/services/${slug}`)];

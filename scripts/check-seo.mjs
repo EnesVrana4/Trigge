@@ -29,6 +29,7 @@ for (const path of paths) {
   assert.ok(graph.some((item) => item["@type"] === "WebPage"), `WebPage schema: ${path}`);
   if (path.startsWith("/services/")) {
     assert.ok(graph.some((item) => item["@type"] === "Service" && item.url === `${origin}${path}`), `Service schema: ${path}`);
+    assert.ok(graph.some((item) => item["@type"] === "FAQPage"), `FAQPage schema: ${path}`);
     assert.equal(graph.find((item) => item["@type"] === "BreadcrumbList").itemListElement.length, 3);
   }
   for (const match of html.matchAll(/href="(\/(?!\/)[^"#?]*)"/g)) {

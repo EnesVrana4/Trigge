@@ -10,7 +10,7 @@ const PAGE = {
   path: "/contact",
   title: "Contact Us — Free Project Consultation",
   description:
-    "Tell us about your project and get a free consultation with a fixed written quote. We reply within one business day, anywhere in the United States.",
+    "Tell us about your project and get a free consultation with a fixed written quote. Based near Philadelphia, PA, we reply within one business day across the United States.",
 };
 
 export const metadata: Metadata = pageMeta({

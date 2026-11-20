@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Trigge Solutions",
   },
   description:
-    "Custom websites, web applications and e-commerce platforms for businesses across the United States. Free consultation and a fixed written quote.",
+    "Based near Philadelphia, PA, Trigge Solutions builds custom websites, web applications and e-commerce platforms for businesses in Greater Philadelphia and across the United States. Free consultation and a fixed written quote.",
   authors: [{ name: "Trigge Solutions", url: SITE_URL }],
   creator: "Trigge Solutions",
   publisher: "Trigge Solutions",
@@ -42,14 +42,14 @@ export const metadata: Metadata = {
     siteName: "Trigge Solutions",
     title: "Trigge Solutions | Website & Web App Development",
     description:
-      "Custom websites, web applications and e-commerce platforms for businesses across the United States.",
+      "Custom websites, web applications and e-commerce platforms from Greater Philadelphia, PA for businesses across the United States.",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Trigge Solutions" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Trigge Solutions | Website & Web App Development",
     description:
-      "Custom websites, web applications and e-commerce platforms for businesses across the United States.",
+      "Custom websites, web applications and e-commerce platforms from Greater Philadelphia, PA for businesses across the United States.",
     images: [OG_IMAGE],
   },
 };

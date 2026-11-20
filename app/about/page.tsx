@@ -11,9 +11,9 @@ import { PORTFOLIO_ENABLED, VALUES } from "@/lib/data";
 
 const PAGE = {
   path: "/about",
-  title: "Software Development Team in Pennsylvania",
+  title: "Software Development Team Near Philadelphia, PA",
   description:
-    "Meet the team behind Trigge Solutions: a software studio in Pennsylvania building websites and web platforms for businesses across the United States.",
+    "Meet the team behind Trigge Solutions: a software studio near Philadelphia, Pennsylvania building websites and web platforms for businesses in Greater Philadelphia and across the United States.",
 };
 
 export const metadata: Metadata = pageMeta({
@@ -54,7 +54,7 @@ export default function AboutPage() {
                   and a codebase, that belongs entirely to you.
                 </p>
                 <p>
-                  We serve businesses across the United States, from teams that need
+                  We serve businesses across Greater Philadelphia, Pennsylvania and the United States, from teams that need
                   a clear business website to those planning a customer portal or
                   internal tool. Each project starts with your workflow and goals.
                 </p>

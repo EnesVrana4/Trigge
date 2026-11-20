@@ -530,7 +530,7 @@ export default function HeroScene({ fontClass }: { fontClass: string }) {
             className="mt-[22px] max-w-[470px] text-base font-medium leading-7 text-[#b9bfc7] sm:text-[17px]"
             style={rise(3)}
           >
-            Custom website and web application development from Pennsylvania,
+            Custom website and web application development from Greater Philadelphia, Pennsylvania,
             serving businesses across the United States.
           </p>
 

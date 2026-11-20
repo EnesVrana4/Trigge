@@ -5,8 +5,15 @@ export const SITE_URL = "https://triggesolutions.com";
 export const BRAND = "Trigge Solutions";
 export const OG_IMAGE = "/og/trigge-solutions.png";
 
-/** Both markets are served from Pennsylvania, in English. */
+/** Philadelphia & Pennsylvania first, plus nationwide U.S. and Canada. */
 const SERVED = [
+  {
+    "@type": "City",
+    name: "Philadelphia",
+    containedInPlace: { "@type": "State", name: "Pennsylvania" },
+  },
+  { "@type": "AdministrativeArea", name: "Greater Philadelphia" },
+  { "@type": "State", name: "Pennsylvania" },
   { "@type": "Country", name: "United States" },
   { "@type": "Country", name: "Canada" },
 ];
@@ -67,14 +74,15 @@ function organization() {
     url: SITE_URL,
     email: CONTACT.email,
     description:
-      "Trigge Solutions is a software development company building custom websites, web applications, e-commerce platforms and internal tools for businesses across the United States and Canada.",
+      "Trigge Solutions is a software development company near Philadelphia, Pennsylvania, building custom websites, web applications, e-commerce platforms and internal tools for businesses in Greater Philadelphia and across the United States and Canada.",
     slogan: "Build · Innovate · Grow",
     logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.png` },
     image: `${SITE_URL}${OG_IMAGE}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Croydon",
-      addressRegion: "Pennsylvania",
+      addressRegion: "PA",
+      postalCode: "19021",
       addressCountry: "US",
     },
     areaServed: SERVED,
@@ -137,11 +145,14 @@ function breadcrumbs(path: string, title: string) {
 }
 
 /** The questions people actually ask, in the form Google and AI tools read. */
-function faqPage(path: string) {
+function faqPage(
+  path: string,
+  items: { question: string; answer: string }[] = FAQS,
+) {
   return {
     "@type": "FAQPage",
     "@id": `${url(path)}#faq`,
-    mainEntity: FAQS.map((faq) => ({
+    mainEntity: items.map((faq) => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: { "@type": "Answer", text: faq.answer },
@@ -150,22 +161,25 @@ function faqPage(path: string) {
 }
 
 /**
- * The JSON-LD graph for one page. `faq` adds the FAQ block, which belongs only
- * on pages that actually show those questions.
+ * The JSON-LD graph for one page. `faq` or `faqs` adds the FAQ block, which
+ * belongs only on pages that actually show those questions.
  */
 export function pageSchema({
   path,
   title,
   description,
   faq = false,
+  faqs,
   service,
 }: {
   path: string;
   title: string;
   description: string;
   faq?: boolean;
+  faqs?: { question: string; answer: string }[];
   service?: (typeof SERVICES)[number];
 }) {
+  const faqItems = faqs ?? (faq ? FAQS : undefined);
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -194,7 +208,7 @@ export function pageSchema({
         areaServed: SERVED,
         mainEntityOfPage: { "@id": `${url(path)}#webpage` },
       }] : []),
-      ...(faq ? [faqPage(path)] : []),
+      ...(faqItems?.length ? [faqPage(path, faqItems)] : []),
     ],
   };
 }

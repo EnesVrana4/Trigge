@@ -1,14 +1,14 @@
 # Trigge Solutions
 
-> Software development company based in Pennsylvania, United States, building
+> Software development company based near Philadelphia, Pennsylvania, building
 > custom websites, web applications, e-commerce platforms and internal tools for
-> businesses across the United States. Every project starts with a
+> businesses across Greater Philadelphia and the United States. Every project starts with a
 > free consultation and a fixed written quote, and the client owns the code.
 
 - Website: https://triggesolutions.com
 - Contact: trigge.info@gmail.com | https://triggesolutions.com/contact
 - Based in: Croydon, Pennsylvania, near Philadelphia
-- Serves: United States (all 50 states) and Canada, in every time zone
+- Serves: Greater Philadelphia, Pennsylvania, United States (all 50 states) and Canada, in every time zone
 - Languages: English
 
 ## Services

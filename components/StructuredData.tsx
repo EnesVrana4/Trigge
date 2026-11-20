@@ -11,6 +11,7 @@ export default function StructuredData(props: {
   title: string;
   description: string;
   faq?: boolean;
+  faqs?: { question: string; answer: string }[];
   service?: (typeof SERVICES)[number];
 }) {
   return (

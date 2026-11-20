@@ -31,7 +31,7 @@ export default async function ServicePage({ params }: Props) {
   const path = `/services/${service.slug}`;
   return (
     <>
-      <StructuredData path={path} title={content.title} description={content.description} service={service} />
+      <StructuredData path={path} title={content.title} description={content.description} service={service} faqs={content.faqs} />
       <PageHero eyebrow="Our services" title={content.title} description={content.description} />
       <div className="container-page py-6">
         <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-sm text-slate-500">
@@ -52,7 +52,7 @@ export default async function ServicePage({ params }: Props) {
           <h2 className="mt-4 text-2xl font-bold">A clear scope before you commit</h2>
           <p className="mt-4 leading-relaxed text-white/70">Tell us what you need. We will discuss the approach, identify constraints and prepare a written quote for the agreed work.</p>
           <Link href="/contact" className="btn-primary mt-6 inline-flex gap-2">Get a free consultation <ArrowRight size={18} /></Link>
-          <p className="mt-5 text-sm text-white/60">Based in Pennsylvania. Serving businesses across the United States.</p>
+          <p className="mt-5 text-sm text-white/60">Based near Philadelphia, PA. Serving Greater Philadelphia and businesses across the United States.</p>
         </aside>
       </section>
       <section className="bg-slate-50 py-16">

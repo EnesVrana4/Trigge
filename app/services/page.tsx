@@ -12,7 +12,7 @@ const PAGE = {
   path: "/services",
   title: "Web Development & Custom Software Services",
   description:
-    "Web development, custom web applications, e-commerce, UI/UX design, API integrations and ongoing support for businesses in the United States.",
+    "Web development, custom web applications, e-commerce, UI/UX design, API integrations and ongoing support from Greater Philadelphia, PA for businesses across the United States.",
 };
 
 export const metadata: Metadata = pageMeta({
