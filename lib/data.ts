@@ -343,6 +343,6 @@ export const SOCIAL_LINKS = {
 };
 
 export const CONTACT = {
-  email: "trigge.info@gmail.com",
+  email: "info@triggesolutions.com",
   location: "Croydon, Pennsylvania, near Philadelphia",
 };
