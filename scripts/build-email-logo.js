@@ -55,5 +55,6 @@ ${lines};
 `,
   );
 
-  console.log(`✓ Wrote ${path.relative(root, target)} (${buffer.length} bytes of PNG).`);
+  fs.writeFileSync(path.join(root, "public", "images", "email-mark.png"), buffer);
+  console.log(`✓ Wrote ${path.relative(root, target)} and public/images/email-mark.png (${buffer.length} bytes of PNG).`);
 })();

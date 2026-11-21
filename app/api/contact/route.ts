@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { CONTACT } from "@/lib/data";
-import { EMAIL_LOGO_CID, EMAIL_LOGO_PNG_BASE64 } from "@/lib/email-logo";
+import { SITE_URL } from "@/lib/seo";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -105,11 +105,11 @@ function renderInquiryEmail({
           <tr>
             <td bgcolor="${NAVY_950}" style="background-color:${NAVY_950};padding:32px 32px 28px">
 
-              <!-- Logo lockup: CID-attached mark + live wordmark, as on the site -->
+              <!-- Logo lockup: hosted HTTPS mark + live wordmark, no CID attachment -->
               <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="padding-right:12px;vertical-align:middle">
-                    <img src="cid:${EMAIL_LOGO_CID}" width="40" alt="Trigge Solutions"
+                    <img src="${SITE_URL}/images/email-mark.png" width="40" alt="Trigge Solutions"
                          style="display:block;width:40px;height:auto;border:0;outline:none;text-decoration:none">
                   </td>
                   <td style="vertical-align:middle">
@@ -155,21 +155,10 @@ function renderInquiryEmail({
                 </tr>
               </table>
 
-              <!-- Reply button, matching .btn-dark on the site -->
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px">
-                <tr>
-                  <td bgcolor="${NAVY_950}" style="background-color:${NAVY_950};border-radius:999px">
-                    <a href="mailto:${escapeHtml(email)}?subject=${encodeURIComponent(
-                      `Re: your inquiry — Trigge Solutions`,
-                    )}" style="display:inline-block;padding:14px 26px;font-family:${FONT};font-size:14px;font-weight:600;color:#ffffff;text-decoration:none">Reply to ${escapeHtml(
-                      name.split(" ")[0],
-                    )} &rarr;</a>
-                  </td>
-                </tr>
-              </table>
-
-              <div style="font-family:${FONT};font-size:12px;color:${MUTED};margin-top:14px">
-                Or just hit Reply — this email answers ${escapeHtml(name)} directly.
+              <div style="font-family:${FONT};font-size:13px;color:${MUTED};margin-top:24px;padding:12px 16px;background-color:#f6f8fc;border-radius:10px">
+                Hit <strong style="color:${NAVY_900}">Reply</strong> in your email client to answer <strong style="color:${NAVY_900}">${escapeHtml(
+                  name,
+                )}</strong> (${escapeHtml(email)}) directly.
               </div>
             </td>
           </tr>
@@ -180,7 +169,7 @@ function renderInquiryEmail({
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="font-family:${FONT};font-size:12px;line-height:1.8;color:#8e9bb3">
-                    <a href="mailto:${CONTACT.email}" style="color:${ACCENT};text-decoration:none">${CONTACT.email}</a><br>
+                    <span style="color:${ACCENT}">${CONTACT.email}</span><br>
                     ${escapeHtml(CONTACT.location)}
                   </td>
                 </tr>
@@ -274,23 +263,25 @@ export async function POST(request: Request) {
 
   const host = process.env.SMTP_HOST?.trim() || (isGmail ? undefined : "mail.privateemail.com");
   const port = Number(process.env.SMTP_PORT) || 465;
-  const transporter = host ? nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } }) : nodemailer.createTransport({
-    service: "gmail",
-    auth: { user, pass },
-  });
+  const transporter = host
+    ? nodemailer.createTransport({ host, port, secure: port === 465, auth: { user, pass } })
+    : nodemailer.createTransport({
+        service: "gmail",
+        auth: { user, pass },
+      });
 
   // Name and company already head the email, so they are not repeated here.
   const details: Detail[] = [
-    { label: "Email", value: email, href: `mailto:${email}` },
+    { label: "Email", value: email },
     { label: "Budget", value: budget || "—" },
     { label: "Services", value: services || "—" },
   ];
 
   try {
     await transporter.sendMail({
-      from: `"Trigge Solutions Website" <${user}>`,
+      from: `"Trigge Solutions" <${user}>`,
       to,
-      // Hitting "Reply" in Gmail answers the visitor directly.
+      // Hitting "Reply" answers the visitor directly.
       replyTo: `"${name}" <${email}>`,
       subject: `New project inquiry from ${name}${company ? ` (${company})` : ""}`,
       text: [
@@ -308,17 +299,6 @@ export async function POST(request: Request) {
         CONTACT.location,
       ].join("\n"),
       html: renderInquiryEmail({ name, email, message, company, details }),
-      attachments: [
-        {
-          // Referenced as cid: in the header. Gmail blocks data: URIs in <img>,
-          // so the mark has to travel as a related part, not inline.
-          filename: "trigge-mark.png",
-          cid: EMAIL_LOGO_CID,
-          content: Buffer.from(EMAIL_LOGO_PNG_BASE64, "base64"),
-          contentType: "image/png",
-          contentDisposition: "inline",
-        },
-      ],
     });
 
     return NextResponse.json({
