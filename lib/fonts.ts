@@ -1,27 +1,25 @@
-import { JetBrains_Mono, Manrope, Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 
-// Fonts of the approved hero and intro design: Manrope for the hero copy,
-// Montserrat for the wordmark, eyebrow and loader words, JetBrains Mono for the
-// loader's counter. The hero applies all three; Montserrat is also set on
-// <html> in app/layout.tsx, for the logo's wordmark on every page.
+// Self-hosted Google Fonts (Manrope, Montserrat, JetBrains Mono) via next/font/local
+// so builds never fail due to Google Fonts API URL format changes on Vercel.
 
-export const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+export const manrope = localFont({
+  src: "../app/fonts/manrope-latin.woff2",
+  weight: "500 700",
   variable: "--font-manrope",
   display: "swap",
 });
 
-export const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["600", "700"],
+export const montserrat = localFont({
+  src: "../app/fonts/montserrat-latin.woff2",
+  weight: "600 700",
   variable: "--font-montserrat",
   display: "swap",
 });
 
-export const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400"],
+export const jetbrainsMono = localFont({
+  src: "../app/fonts/jetbrains-mono-latin.woff2",
+  weight: "400",
   variable: "--font-jetbrains",
   display: "swap",
 });

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { SITE_URL, OG_IMAGE } from "@/lib/seo";
 import { montserrat } from "@/lib/fonts";
 import Header from "@/components/Header";
@@ -7,8 +7,9 @@ import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/inter-latin.woff2",
+  weight: "100 900",
   variable: "--font-inter",
   display: "swap",
 });
